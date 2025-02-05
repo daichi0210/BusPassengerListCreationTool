@@ -33,11 +33,11 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            comboBox1 = new ComboBox();
+            textBoxName = new TextBox();
+            textBoxAddress = new TextBox();
+            textBoxTEL = new TextBox();
+            textBoxRemarks = new TextBox();
+            comboBoxBusStop = new ComboBox();
             button1 = new Button();
             button2 = new Button();
             SuspendLayout();
@@ -87,42 +87,42 @@
             label5.TabIndex = 4;
             label5.Text = "備考";
             // 
-            // textBox1
+            // textBoxName
             // 
-            textBox1.Location = new Point(90, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 5;
+            textBoxName.Location = new Point(90, 12);
+            textBoxName.Name = "textBoxName";
+            textBoxName.Size = new Size(100, 23);
+            textBoxName.TabIndex = 5;
             // 
-            // textBox2
+            // textBoxAddress
             // 
-            textBox2.Location = new Point(90, 41);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 6;
+            textBoxAddress.Location = new Point(90, 41);
+            textBoxAddress.Name = "textBoxAddress";
+            textBoxAddress.Size = new Size(100, 23);
+            textBoxAddress.TabIndex = 6;
             // 
-            // textBox3
+            // textBoxTEL
             // 
-            textBox3.Location = new Point(90, 70);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 7;
+            textBoxTEL.Location = new Point(90, 70);
+            textBoxTEL.Name = "textBoxTEL";
+            textBoxTEL.Size = new Size(100, 23);
+            textBoxTEL.TabIndex = 7;
             // 
-            // textBox4
+            // textBoxRemarks
             // 
-            textBox4.Location = new Point(90, 128);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 8;
+            textBoxRemarks.Location = new Point(90, 128);
+            textBoxRemarks.Name = "textBoxRemarks";
+            textBoxRemarks.Size = new Size(100, 23);
+            textBoxRemarks.TabIndex = 8;
             // 
-            // comboBox1
+            // comboBoxBusStop
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "", "末", "更毛", "桜ヶ丘", "本堂", "ヒロミストアー", "羽坂団地", "北堀", "恐神" });
-            comboBox1.Location = new Point(90, 99);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(100, 23);
-            comboBox1.TabIndex = 9;
+            comboBoxBusStop.FormattingEnabled = true;
+            comboBoxBusStop.Items.AddRange(new object[] { "", "末", "更毛", "桜ヶ丘", "本堂", "ヒロミストアー", "羽坂団地", "北堀", "恐神" });
+            comboBoxBusStop.Location = new Point(90, 99);
+            comboBoxBusStop.Name = "comboBoxBusStop";
+            comboBoxBusStop.Size = new Size(100, 23);
+            comboBoxBusStop.TabIndex = 9;
             // 
             // button1
             // 
@@ -132,6 +132,7 @@
             button1.TabIndex = 10;
             button1.Text = "登録";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -149,11 +150,11 @@
             ClientSize = new Size(334, 161);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(comboBoxBusStop);
+            Controls.Add(textBoxRemarks);
+            Controls.Add(textBoxTEL);
+            Controls.Add(textBoxAddress);
+            Controls.Add(textBoxName);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -172,11 +173,11 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private ComboBox comboBox1;
+        private TextBox textBoxName;
+        private TextBox textBoxAddress;
+        private TextBox textBoxTEL;
+        private TextBox textBoxRemarks;
+        private ComboBox comboBoxBusStop;
         private Button button1;
         private Button button2;
     }

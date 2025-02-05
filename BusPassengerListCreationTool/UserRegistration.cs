@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace BusPassengerListCreationTool
 {
@@ -15,6 +16,22 @@ namespace BusPassengerListCreationTool
         public UserRegistration()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //★入力チェック
+
+            //★データベースに登録
+            string name = textBoxName.Text;
+            string address = textBoxAddress.Text;
+            string TEL = textBoxTEL.Text;
+            string busStop = comboBoxBusStop.Text;
+            string remarks = textBoxRemarks.Text;
+
+            UserListDatabase users = new UserListDatabase();
+            users.addDB(name, address, TEL, busStop, remarks);
+
         }
     }
 }

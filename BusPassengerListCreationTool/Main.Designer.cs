@@ -34,6 +34,8 @@
             button4 = new Button();
             dateTimePicker1 = new DateTimePicker();
             label1 = new Label();
+            dataGridViewUsers = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -90,11 +92,20 @@
             label1.TabIndex = 5;
             label1.Text = "乗車日";
             // 
+            // dataGridViewUsers
+            // 
+            dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUsers.Location = new Point(12, 41);
+            dataGridViewUsers.Name = "dataGridViewUsers";
+            dataGridViewUsers.Size = new Size(508, 383);
+            dataGridViewUsers.TabIndex = 6;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(654, 311);
+            ClientSize = new Size(654, 519);
+            Controls.Add(dataGridViewUsers);
             Controls.Add(label1);
             Controls.Add(dateTimePicker1);
             Controls.Add(button4);
@@ -103,6 +114,8 @@
             Controls.Add(button1);
             Name = "Main";
             Text = "あごころバス乗車名簿　作成ツール";
+            Load += Main_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -115,5 +128,6 @@
         private Button button4;
         private DateTimePicker dateTimePicker1;
         private Label label1;
+        private DataGridView dataGridViewUsers;
     }
 }

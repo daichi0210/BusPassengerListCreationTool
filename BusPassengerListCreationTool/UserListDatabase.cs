@@ -17,6 +17,7 @@ namespace BusPassengerListCreationTool
         // データベースファイルへの接続文字列
         string connectionString = "Data Source=users.db;Version=3;";
 
+        //public DataTable loadDB()
         public DataTable loadDB()
         {
             // SQLiteの接続を開く
@@ -81,6 +82,49 @@ namespace BusPassengerListCreationTool
         public void deleteDB()
         {
 
+        }
+
+        public string[] loadName()
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                // データベース接続を開く
+                connection.Open();
+
+                // テーブルがなければ作成するSQL
+                string createTableQuery = "CREATE TABLE IF NOT EXISTS Users (Id INTEGER PRIMARY KEY, Name TEXT, Address TEXT, TEL TEXT, BusStop TEXT, Remarks TEXT)";
+                using (var cmd = new SQLiteCommand(createTableQuery, connection))
+                {
+                    // SQL文を実行してテーブルを作成
+                    cmd.ExecuteNonQuery();
+                }
+
+                // 文字配列にデータを挿入
+                string[] names = new string[0];
+                int count = 0;
+
+                using (var cmd = new SQLiteCommand(connection))
+                {
+                    // 氏名を取得するSQL
+                    cmd.CommandText = "SELECT Name FROM Users";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Array.Resize(ref names, count + 1);
+                            names[count] = reader["name"].ToString();
+                            count++;
+                        }
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+
+                return names;
+            }
         }
     }
 }

@@ -29,52 +29,52 @@
         private void InitializeComponent()
         {
             button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            buttonUserRegistration = new Button();
+            buttonSettings = new Button();
+            buttonUserList = new Button();
             dateTimePicker1 = new DateTimePicker();
             label1 = new Label();
-            dataGridViewUsers = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
+            checkedListBoxUserSelection = new CheckedListBox();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(526, 275);
+            button1.Location = new Point(267, 292);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(86, 23);
             button1.TabIndex = 0;
             button1.Text = "作成";
             button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // buttonUserRegistration
             // 
-            button2.Location = new Point(526, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(117, 23);
-            button2.TabIndex = 1;
-            button2.Text = "使用者登録";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            buttonUserRegistration.Location = new Point(267, 41);
+            buttonUserRegistration.Name = "buttonUserRegistration";
+            buttonUserRegistration.Size = new Size(86, 23);
+            buttonUserRegistration.TabIndex = 1;
+            buttonUserRegistration.Text = "使用者登録";
+            buttonUserRegistration.UseVisualStyleBackColor = true;
+            buttonUserRegistration.Click += buttonUserRegistration_Click;
             // 
-            // button3
+            // buttonSettings
             // 
-            button3.Location = new Point(526, 70);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 2;
-            button3.Text = "設定";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            buttonSettings.Location = new Point(267, 128);
+            buttonSettings.Name = "buttonSettings";
+            buttonSettings.Size = new Size(86, 23);
+            buttonSettings.TabIndex = 2;
+            buttonSettings.Text = "設定";
+            buttonSettings.UseVisualStyleBackColor = true;
+            buttonSettings.Click += buttonSettings_Click;
             // 
-            // button4
+            // buttonUserList
             // 
-            button4.Location = new Point(526, 41);
-            button4.Name = "button4";
-            button4.Size = new Size(117, 23);
-            button4.TabIndex = 3;
-            button4.Text = "使用者情報編集";
-            button4.UseVisualStyleBackColor = true;
+            buttonUserList.Location = new Point(267, 70);
+            buttonUserList.Name = "buttonUserList";
+            buttonUserList.Size = new Size(86, 23);
+            buttonUserList.TabIndex = 3;
+            buttonUserList.Text = "使用者一覧";
+            buttonUserList.UseVisualStyleBackColor = true;
+            buttonUserList.Click += buttonUserList_Click;
             // 
             // dateTimePicker1
             // 
@@ -92,30 +92,30 @@
             label1.TabIndex = 5;
             label1.Text = "乗車日";
             // 
-            // dataGridViewUsers
+            // checkedListBoxUserSelection
             // 
-            dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewUsers.Location = new Point(12, 41);
-            dataGridViewUsers.Name = "dataGridViewUsers";
-            dataGridViewUsers.Size = new Size(508, 383);
-            dataGridViewUsers.TabIndex = 6;
+            checkedListBoxUserSelection.CheckOnClick = true;
+            checkedListBoxUserSelection.FormattingEnabled = true;
+            checkedListBoxUserSelection.Location = new Point(12, 41);
+            checkedListBoxUserSelection.Name = "checkedListBoxUserSelection";
+            checkedListBoxUserSelection.Size = new Size(249, 274);
+            checkedListBoxUserSelection.TabIndex = 7;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(654, 519);
-            Controls.Add(dataGridViewUsers);
+            ClientSize = new Size(364, 326);
+            Controls.Add(checkedListBoxUserSelection);
             Controls.Add(label1);
             Controls.Add(dateTimePicker1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(buttonUserList);
+            Controls.Add(buttonSettings);
+            Controls.Add(buttonUserRegistration);
             Controls.Add(button1);
             Name = "Main";
             Text = "あごころバス乗車名簿　作成ツール";
             Load += Main_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,11 +123,11 @@
         #endregion
 
         private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button buttonUserRegistration;
+        private Button buttonSettings;
+        private Button buttonUserList;
         private DateTimePicker dateTimePicker1;
         private Label label1;
-        private DataGridView dataGridViewUsers;
+        private CheckedListBox checkedListBoxUserSelection;
     }
 }

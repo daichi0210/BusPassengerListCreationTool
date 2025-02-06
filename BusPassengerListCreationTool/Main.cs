@@ -15,7 +15,7 @@ namespace BusPassengerListCreationTool
             databaseLoad();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonUserRegistration_Click(object sender, EventArgs e)
         {
             UserRegistration userRegistration = new UserRegistration();
             userRegistration.ShowDialog();
@@ -23,7 +23,14 @@ namespace BusPassengerListCreationTool
             databaseLoad();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonUserList_Click(object sender, EventArgs e)
+        {
+            UserList userList = new UserList();
+            userList.ShowDialog();
+
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
         {
             Setting setting = new Setting();
             setting.ShowDialog();
@@ -31,12 +38,17 @@ namespace BusPassengerListCreationTool
 
         public void databaseLoad()
         {
-            // データを取得
-            UserListDatabase users = new UserListDatabase();
-            DataTable dataTable = users.loadDB();
 
-            // DataGridViewにデータをバインドする
-            dataGridViewUsers.DataSource = dataTable;
+
+            checkedListBoxUserSelection.Items.Clear();
+
+            UserListDatabase users = new UserListDatabase();
+            string[] names = users.loadName();
+
+            foreach (string name in names)
+            {
+                checkedListBoxUserSelection.Items.Add(name);
+            }
         }
     }
 }

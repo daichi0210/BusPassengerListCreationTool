@@ -33,3 +33,4 @@ D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTo
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\BusPassengerListCreationTool.csproj.AssemblyReference.cache
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\BusPasse.240F3229.Up2Date
+D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\BusPassengerListCreationTool.UserList.resources

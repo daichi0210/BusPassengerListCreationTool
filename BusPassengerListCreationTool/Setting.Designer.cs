@@ -31,7 +31,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
+            textBoxMaximumNumberOfPeople = new TextBox();
             textBox2 = new TextBox();
             comboBox1 = new ComboBox();
             label4 = new Label();
@@ -65,12 +65,12 @@
             label3.TabIndex = 2;
             label3.Text = "バス運行曜日";
             // 
-            // textBox1
+            // textBoxMaximumNumberOfPeople
             // 
-            textBox1.Location = new Point(97, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 3;
+            textBoxMaximumNumberOfPeople.Location = new Point(97, 12);
+            textBoxMaximumNumberOfPeople.Name = "textBoxMaximumNumberOfPeople";
+            textBoxMaximumNumberOfPeople.Size = new Size(100, 23);
+            textBoxMaximumNumberOfPeople.TabIndex = 3;
             // 
             // textBox2
             // 
@@ -116,7 +116,7 @@
             Controls.Add(label4);
             Controls.Add(comboBox1);
             Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxMaximumNumberOfPeople);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -131,7 +131,7 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox textBoxMaximumNumberOfPeople;
         private TextBox textBox2;
         private ComboBox comboBox1;
         private Label label4;

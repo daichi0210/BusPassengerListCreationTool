@@ -1,5 +1,8 @@
 using System.Data.SQLite;
 using System.Data;
+using System.Net;
+using System.Xml.Linq;
+using System;
 
 namespace BusPassengerListCreationTool
 {
@@ -49,6 +52,26 @@ namespace BusPassengerListCreationTool
             {
                 checkedListBoxUserSelection.Items.Add(name);
             }
+        }
+
+        private void buttonCreate_Click(object sender, EventArgs e)
+        {
+            // 乗車人数の上限を取得する
+            
+
+            //★チェックされているIdを渡す
+
+            // 乗車する人の情報をリストに追加する
+            UserListDatabase users = new UserListDatabase();
+            string[] userData = users.getDB();
+
+            foreach (string ud in userData)
+            {
+                MessageBox.Show(ud);
+            }
+
+            // リストを作成する
+
         }
     }
 }

@@ -79,10 +79,67 @@ namespace BusPassengerListCreationTool
                 connection.Close();
             }
         }
+        public void editDB()
+        {
+
+        }
+
         public void deleteDB()
         {
 
         }
+
+        public string[] getDB()
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                // データベース接続を開く
+                connection.Open();
+
+                // データを取得するSQL
+                string selectQuery = "SELECT * FROM Users";
+
+                // データテーブルにデータを挿入
+                DataTable dataTable = new DataTable();
+                using (var cmd = new SQLiteCommand(selectQuery, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        // データをDataTableに埋め込む
+                        adapter.Fill(dataTable);
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+
+                //
+                string[] userData = new string[0];
+                int count = 0;
+
+                // データを一行ずつ取り出す
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    string rowData = "";
+                    rowData +=
+                        dr["Name"].ToString() + "," +
+                        dr["Address"].ToString() + "," +
+                        dr["TEL"].ToString() + "," +
+                        dr["BusStop"].ToString() + "," +
+                        dr["Remarks"].ToString();
+
+                    Array.Resize(ref userData, count + 1);
+                    userData[count] = rowData;
+                    count++;
+                }
+
+                return userData;
+            }
+        }
+
+
+
 
         public string[] loadName()
         {

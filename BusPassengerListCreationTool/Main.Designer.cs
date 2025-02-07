@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            buttonCreate = new Button();
             buttonUserRegistration = new Button();
             buttonSettings = new Button();
             buttonUserList = new Button();
@@ -37,14 +37,15 @@
             checkedListBoxUserSelection = new CheckedListBox();
             SuspendLayout();
             // 
-            // button1
+            // buttonCreate
             // 
-            button1.Location = new Point(267, 292);
-            button1.Name = "button1";
-            button1.Size = new Size(86, 23);
-            button1.TabIndex = 0;
-            button1.Text = "作成";
-            button1.UseVisualStyleBackColor = true;
+            buttonCreate.Location = new Point(267, 292);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(86, 23);
+            buttonCreate.TabIndex = 0;
+            buttonCreate.Text = "作成";
+            buttonCreate.UseVisualStyleBackColor = true;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // buttonUserRegistration
             // 
@@ -112,7 +113,7 @@
             Controls.Add(buttonUserList);
             Controls.Add(buttonSettings);
             Controls.Add(buttonUserRegistration);
-            Controls.Add(button1);
+            Controls.Add(buttonCreate);
             Name = "Main";
             Text = "あごころバス乗車名簿　作成ツール";
             Load += Main_Load;
@@ -122,7 +123,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button buttonCreate;
         private Button buttonUserRegistration;
         private Button buttonSettings;
         private Button buttonUserList;

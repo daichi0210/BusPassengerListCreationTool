@@ -34,9 +34,17 @@
             // 
             // dataGridViewUsers
             // 
+            dataGridViewUsers.AllowUserToAddRows = false;
+            dataGridViewUsers.AllowUserToDeleteRows = false;
+            dataGridViewUsers.AllowUserToResizeColumns = false;
+            dataGridViewUsers.AllowUserToResizeRows = false;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUsers.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewUsers.Location = new Point(12, 12);
+            dataGridViewUsers.MultiSelect = false;
             dataGridViewUsers.Name = "dataGridViewUsers";
+            dataGridViewUsers.RowHeadersVisible = false;
+            dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewUsers.Size = new Size(776, 265);
             dataGridViewUsers.TabIndex = 0;
             // 

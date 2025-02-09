@@ -31,6 +31,8 @@ namespace BusPassengerListCreationTool
             UserList userList = new UserList();
             userList.ShowDialog();
 
+            // ÉfÅ[É^Çì«Ç›çûÇﬁ
+            databaseLoad();
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
@@ -41,8 +43,6 @@ namespace BusPassengerListCreationTool
 
         public void databaseLoad()
         {
-
-
             checkedListBoxUserSelection.Items.Clear();
 
             UserListDatabase users = new UserListDatabase();

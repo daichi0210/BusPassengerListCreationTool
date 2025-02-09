@@ -84,9 +84,31 @@ namespace BusPassengerListCreationTool
 
         }
 
-        public void deleteDB()
+        public void deleteDB(int targetId)
         {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                // データベース接続を開く
+                connection.Open();
 
+                // データを取得するSQL
+                string selectQuery = "DELETE FROM Users WHERE ID = @id";
+
+                using (var cmd = new SQLiteCommand(selectQuery, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@id", targetId);
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+            }
         }
 
         public string[] getDB()

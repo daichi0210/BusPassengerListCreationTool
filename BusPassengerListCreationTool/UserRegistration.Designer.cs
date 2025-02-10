@@ -38,8 +38,8 @@
             textBoxTEL = new TextBox();
             textBoxRemarks = new TextBox();
             comboBoxBusStop = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
+            buttonRegistration = new Button();
+            buttonCancel = new Button();
             SuspendLayout();
             // 
             // label1
@@ -124,32 +124,33 @@
             comboBoxBusStop.Size = new Size(100, 23);
             comboBoxBusStop.TabIndex = 9;
             // 
-            // button1
+            // buttonRegistration
             // 
-            button1.Location = new Point(248, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 10;
-            button1.Text = "登録";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonRegistration.Location = new Point(248, 11);
+            buttonRegistration.Name = "buttonRegistration";
+            buttonRegistration.Size = new Size(75, 23);
+            buttonRegistration.TabIndex = 10;
+            buttonRegistration.Text = "登録";
+            buttonRegistration.UseVisualStyleBackColor = true;
+            buttonRegistration.Click += buttonRegistration_Click;
             // 
-            // button2
+            // buttonCancel
             // 
-            button2.Location = new Point(248, 40);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 11;
-            button2.Text = "キャンセル";
-            button2.UseVisualStyleBackColor = true;
+            buttonCancel.Location = new Point(248, 40);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(75, 23);
+            buttonCancel.TabIndex = 11;
+            buttonCancel.Text = "キャンセル";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // UserRegistration
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(334, 161);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonRegistration);
             Controls.Add(comboBoxBusStop);
             Controls.Add(textBoxRemarks);
             Controls.Add(textBoxTEL);
@@ -178,7 +179,7 @@
         private TextBox textBoxTEL;
         private TextBox textBoxRemarks;
         private ComboBox comboBoxBusStop;
-        private Button button1;
-        private Button button2;
+        private Button buttonRegistration;
+        private Button buttonCancel;
     }
 }

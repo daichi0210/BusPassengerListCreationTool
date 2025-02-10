@@ -18,7 +18,7 @@ namespace BusPassengerListCreationTool
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonRegistration_Click(object sender, EventArgs e)
         {
             //★入力チェック
 
@@ -32,6 +32,12 @@ namespace BusPassengerListCreationTool
             UserListDatabase users = new UserListDatabase();
             users.addDB(name, address, TEL, busStop, remarks);
 
+            this.Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

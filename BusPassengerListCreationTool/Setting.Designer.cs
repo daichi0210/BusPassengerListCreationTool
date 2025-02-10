@@ -36,6 +36,8 @@
             comboBox1 = new ComboBox();
             label4 = new Label();
             label5 = new Label();
+            buttonSave = new Button();
+            buttonCancel = new Button();
             SuspendLayout();
             // 
             // label1
@@ -69,7 +71,7 @@
             // 
             textBoxMaximumNumberOfPeople.Location = new Point(97, 12);
             textBoxMaximumNumberOfPeople.Name = "textBoxMaximumNumberOfPeople";
-            textBoxMaximumNumberOfPeople.Size = new Size(100, 23);
+            textBoxMaximumNumberOfPeople.Size = new Size(39, 23);
             textBoxMaximumNumberOfPeople.TabIndex = 3;
             // 
             // textBox2
@@ -77,22 +79,24 @@
             textBox2.Location = new Point(97, 41);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 128);
+            textBox2.ScrollBars = ScrollBars.Vertical;
+            textBox2.Size = new Size(125, 128);
             textBox2.TabIndex = 4;
             // 
             // comboBox1
             // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "月", "火", "水", "木", "金", "土", "日" });
             comboBox1.Location = new Point(97, 175);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(100, 23);
+            comboBox1.Size = new Size(40, 23);
             comboBox1.TabIndex = 5;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(203, 15);
+            label4.Location = new Point(142, 15);
             label4.Name = "label4";
             label4.Size = new Size(19, 15);
             label4.TabIndex = 6;
@@ -101,17 +105,39 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(203, 178);
+            label5.Location = new Point(143, 178);
             label5.Name = "label5";
             label5.Size = new Size(31, 15);
             label5.TabIndex = 7;
             label5.Text = "曜日";
             // 
+            // buttonSave
+            // 
+            buttonSave.Location = new Point(11, 230);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(75, 23);
+            buttonSave.TabIndex = 8;
+            buttonSave.Text = "保存";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.Location = new Point(99, 230);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(75, 23);
+            buttonCancel.TabIndex = 9;
+            buttonCancel.Text = "キャンセル";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
+            // 
             // Setting
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(239, 261);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonSave);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(comboBox1);
@@ -136,5 +162,7 @@
         private ComboBox comboBox1;
         private Label label4;
         private Label label5;
+        private Button buttonSave;
+        private Button buttonCancel;
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,8 +28,49 @@ namespace BusPassengerListCreationTool
             // DataGridViewにデータをバインドする
             dataGridViewUsers.DataSource = dataTable;
 
+            // 列ヘッダーの文字列を変更する
+            int columnCount = 0;
+            while (columnCount < dataGridViewUsers.ColumnCount)
+            {
+                string cellValue = "";
+
+                switch (dataGridViewUsers.Columns[columnCount].HeaderCell.Value)
+                {
+                    case "Id":
+                        break;
+                    case "Name":
+                        cellValue = "名前";
+                        break;
+                    case "Address":
+                        cellValue = "住所";
+                        break;
+                    case "TEL":
+                        cellValue = "電話番号";
+                        break;
+                    case "BusStop":
+                        cellValue = "バス停";
+                        break;
+                    case "Remarks":
+                        cellValue = "備考";
+                        break;
+                    default:
+                        cellValue = "";
+                        break;
+                }
+
+                if (cellValue != "")
+                {
+                    dataGridViewUsers.Columns[columnCount].HeaderCell.Value = cellValue;
+                }
+
+                columnCount++;
+            }
+
+            // アクティブなセルの選択を解除する
+            dataGridViewUsers.ClearSelection();
+
             // Idの列を非表示
-            //dataGridViewUsers.Columns["Id"].Visible = false;
+            dataGridViewUsers.Columns["Id"].Visible = false;
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

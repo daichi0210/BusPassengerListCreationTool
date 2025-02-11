@@ -31,7 +31,7 @@
             dataGridViewUsers = new DataGridView();
             buttonEdit = new Button();
             buttonDelete = new Button();
-            comboBox1 = new ComboBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +53,7 @@
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(71, 330);
+            buttonEdit.Location = new Point(12, 299);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(75, 23);
             buttonEdit.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(152, 330);
+            buttonDelete.Location = new Point(93, 299);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 23);
             buttonDelete.TabIndex = 4;
@@ -70,20 +70,21 @@
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
-            // comboBox1
+            // label1
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(277, 405);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 5;
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 325);
+            label1.Name = "label1";
+            label1.Size = new Size(281, 15);
+            label1.TabIndex = 5;
+            label1.Text = "※編集・削除したい行を選択してからボタンを押してください";
             // 
             // UserList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
+            Controls.Add(label1);
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
@@ -92,6 +93,7 @@
             Load += UserList_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -99,6 +101,6 @@
         private DataGridView dataGridViewUsers;
         private Button buttonEdit;
         private Button buttonDelete;
-        private ComboBox comboBox1;
+        private Label label1;
     }
 }

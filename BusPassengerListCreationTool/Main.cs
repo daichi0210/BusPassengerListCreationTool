@@ -3,6 +3,7 @@ using System.Data;
 using System.Net;
 using System.Xml.Linq;
 using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusPassengerListCreationTool
 {
@@ -35,12 +36,6 @@ namespace BusPassengerListCreationTool
             databaseLoad();
         }
 
-        private void buttonSettings_Click(object sender, EventArgs e)
-        {
-            Setting setting = new Setting();
-            setting.ShowDialog();
-        }
-
         public void databaseLoad()
         {
             checkedListBoxUserSelection.Items.Clear();
@@ -56,19 +51,29 @@ namespace BusPassengerListCreationTool
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            // 乗車人数の上限を取得する
-            
+            // 設定情報を読み込み
+            Settings settings = new Settings();
 
-            //★チェックされているIdを渡す
 
-            // 乗車する人の情報をリストに追加する
+            //// 乗車する人の情報をリストに追加する
             UserListDatabase users = new UserListDatabase();
             string[] userData = users.getDB();
 
             foreach (string ud in userData)
             {
-                MessageBox.Show(ud);
+                //MessageBox.Show(ud);
             }
+
+            // 選択されている項目を取得
+
+
+            //★チェックされているIdを渡す
+
+            // 最大乗車人数の確認
+
+
+
+            // 次回の運行日を代入
 
             // リストを作成する
 

@@ -16,7 +16,6 @@ D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTo
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\BusPassengerListCreationTool.pdb
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\BusPassengerListCreationTool.genruntimeconfig.cache
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\ref\BusPassengerListCreationTool.dll
-D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\obj\Debug\net8.0-windows\BusPassengerListCreationTool.Setting.resources
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\bin\Debug\net8.0-windows\EntityFramework.SqlServer.dll
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\bin\Debug\net8.0-windows\EntityFramework.dll
 D:\dev\windows\src\repos\BusPassengerListCreationTool\BusPassengerListCreationTool\bin\Debug\net8.0-windows\System.Data.SQLite.dll

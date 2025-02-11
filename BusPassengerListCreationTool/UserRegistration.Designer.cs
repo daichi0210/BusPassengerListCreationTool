@@ -117,8 +117,8 @@
             // 
             // comboBoxBusStop
             // 
+            comboBoxBusStop.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxBusStop.FormattingEnabled = true;
-            comboBoxBusStop.Items.AddRange(new object[] { "", "末", "更毛", "桜ヶ丘", "本堂", "ヒロミストアー", "羽坂団地", "北堀", "恐神" });
             comboBoxBusStop.Location = new Point(90, 99);
             comboBoxBusStop.Name = "comboBoxBusStop";
             comboBoxBusStop.Size = new Size(100, 23);
@@ -163,6 +163,7 @@
             Controls.Add(label1);
             Name = "UserRegistration";
             Text = "使用者登録";
+            Load += UserRegistration_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -30,7 +30,6 @@
         {
             buttonCreate = new Button();
             buttonUserRegistration = new Button();
-            buttonSettings = new Button();
             buttonUserList = new Button();
             dateTimePicker1 = new DateTimePicker();
             label1 = new Label();
@@ -56,16 +55,6 @@
             buttonUserRegistration.Text = "使用者登録";
             buttonUserRegistration.UseVisualStyleBackColor = true;
             buttonUserRegistration.Click += buttonUserRegistration_Click;
-            // 
-            // buttonSettings
-            // 
-            buttonSettings.Location = new Point(267, 128);
-            buttonSettings.Name = "buttonSettings";
-            buttonSettings.Size = new Size(86, 23);
-            buttonSettings.TabIndex = 2;
-            buttonSettings.Text = "設定";
-            buttonSettings.UseVisualStyleBackColor = true;
-            buttonSettings.Click += buttonSettings_Click;
             // 
             // buttonUserList
             // 
@@ -111,7 +100,6 @@
             Controls.Add(label1);
             Controls.Add(dateTimePicker1);
             Controls.Add(buttonUserList);
-            Controls.Add(buttonSettings);
             Controls.Add(buttonUserRegistration);
             Controls.Add(buttonCreate);
             Name = "Main";
@@ -125,7 +113,6 @@
 
         private Button buttonCreate;
         private Button buttonUserRegistration;
-        private Button buttonSettings;
         private Button buttonUserList;
         private DateTimePicker dateTimePicker1;
         private Label label1;

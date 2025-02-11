@@ -18,6 +18,13 @@ namespace BusPassengerListCreationTool
             InitializeComponent();
         }
 
+        private void UserRegistration_Load(object sender, EventArgs e)
+        {
+            // バス停の候補を代入
+            Settings settings = new Settings();
+            comboBoxBusStop.Items.AddRange(settings.getBusStopName());
+        }
+
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
             //★入力チェック

@@ -54,6 +54,21 @@ namespace BusPassengerListCreationTool
             // 設定情報を読み込み
             Settings settings = new Settings();
 
+            // 選択されている項目の個数を取得
+            int checkedCount = 0;
+            foreach (string item in checkedListBoxUserSelection.CheckedItems)
+            {
+                checkedCount++;
+            }
+            
+            // 選択されている項目の数が最大乗車人数を超えている場合
+            if (checkedCount > settings.getMaximumPeople())
+            {
+                MessageBox.Show("最大乗車人数【" + settings.getMaximumPeople() + "人】を超えています。");
+                return;
+            }
+
+            
 
             //// 乗車する人の情報をリストに追加する
             UserListDatabase users = new UserListDatabase();

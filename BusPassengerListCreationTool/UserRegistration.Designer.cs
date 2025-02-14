@@ -126,7 +126,7 @@
             // 
             // buttonRegistration
             // 
-            buttonRegistration.Location = new Point(248, 11);
+            buttonRegistration.Location = new Point(12, 157);
             buttonRegistration.Name = "buttonRegistration";
             buttonRegistration.Size = new Size(75, 23);
             buttonRegistration.TabIndex = 10;
@@ -136,7 +136,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(248, 40);
+            buttonCancel.Location = new Point(115, 157);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 11;
@@ -148,7 +148,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(334, 161);
+            ClientSize = new Size(264, 191);
             Controls.Add(buttonCancel);
             Controls.Add(buttonRegistration);
             Controls.Add(comboBoxBusStop);

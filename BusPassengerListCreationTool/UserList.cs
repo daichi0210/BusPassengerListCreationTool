@@ -116,5 +116,13 @@ namespace BusPassengerListCreationTool
                 }
             }
         }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            UserEdit userEdit = new UserEdit();
+            userEdit.ShowDialog();
+
+
+        }
     }
 }

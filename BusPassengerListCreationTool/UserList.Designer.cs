@@ -59,6 +59,7 @@
             buttonEdit.TabIndex = 1;
             buttonEdit.Text = "編集";
             buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // buttonDelete
             // 
@@ -89,7 +90,7 @@
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
             Name = "UserList";
-            Text = "UserList";
+            Text = "使用者一覧";
             Load += UserList_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ResumeLayout(false);

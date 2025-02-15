@@ -163,6 +163,7 @@
             Controls.Add(buttonSave);
             Name = "UserEdit";
             Text = "使用者情報編集";
+            Load += UserEdit_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -119,10 +119,23 @@ namespace BusPassengerListCreationTool
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
+            // 選択されている行のIDの値を取得
+            int targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
+            var idValue = selectedRow.Cells["Id"].Value;
+            int targetId = Int32.Parse(idValue.ToString());
+
+            // 編集ウィンドウを表示
             UserEdit userEdit = new UserEdit();
+            userEdit.editTargetId = targetId;
             userEdit.ShowDialog();
 
+            // データを取得
+            UserListDatabase users = new UserListDatabase();
+            DataTable dataTable = users.loadDB();
 
+            // DataGridViewにデータをバインドする
+            dataGridViewUsers.DataSource = dataTable;
         }
     }
 }

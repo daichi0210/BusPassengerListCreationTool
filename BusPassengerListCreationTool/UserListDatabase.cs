@@ -9,6 +9,9 @@ using System.Data;
 using System.Net;
 using System.Xml.Linq;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.ComponentModel;
+using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace BusPassengerListCreationTool
 {
@@ -79,9 +82,38 @@ namespace BusPassengerListCreationTool
                 connection.Close();
             }
         }
-        public void editDB()
+        public void editDB(int targetId, string name, string address, string TEL, string busStop, string remarks)
         {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                // データベース接続を開く
+                connection.Open();
 
+                // データを取得するSQL
+                string selectQuery = "UPDATE Users SET Name = @name, Address = @address, TEL = @TEL, BusStop = @busStop, Remarks = @remarks WHERE ID = @id";
+                
+                using (var cmd = new SQLiteCommand(selectQuery, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@address", address);
+                        cmd.Parameters.AddWithValue("@TEL", TEL);
+                        cmd.Parameters.AddWithValue("@busStop", busStop);
+                        cmd.Parameters.AddWithValue("@remarks", remarks);
+                        cmd.Parameters.AddWithValue("@id", targetId);
+
+                        //MessageBox.Show();
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+            }
         }
 
         public void deleteDB(int targetId)
@@ -101,6 +133,7 @@ namespace BusPassengerListCreationTool
                     {
                         // データを挿入
                         cmd.Parameters.AddWithValue("@id", targetId);
+
                         // SQL実行
                         cmd.ExecuteNonQuery();
                     }
@@ -160,7 +193,40 @@ namespace BusPassengerListCreationTool
             }
         }
 
+        public DataTable getUserData(int targetId)
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                // データベース接続を開く
+                connection.Open();
 
+                // データを取得するSQL
+                string selectQuery = "SELECT * FROM Users WHERE ID = @id";
+
+                // データテーブルにデータを挿入
+                DataTable dataTable = new DataTable();
+                using (var cmd = new SQLiteCommand(selectQuery, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@id", targetId);
+
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+
+                        // データをDataTableに埋め込む
+                        adapter.Fill(dataTable);
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+
+                return dataTable;
+            }
+        }
 
 
         public string[] loadName()

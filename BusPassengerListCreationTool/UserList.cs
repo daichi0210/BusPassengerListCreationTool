@@ -21,6 +21,76 @@ namespace BusPassengerListCreationTool
 
         private void UserList_Load(object sender, EventArgs e)
         {
+            // 使用者一覧情報を読み込む
+            loadData();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            int targetIndex = -1;
+
+            // 選択されている行を取得
+            //foreach (DataGridViewRow r in dataGridViewUsers.SelectedRows)
+            //{
+            //    targetIndex = r.Index;
+            //}
+            targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
+
+
+            //★初期状態で一行目が選択されているので不都合？
+            if (targetIndex == -1)
+            {
+                // 削除の確認メッセージ
+                MessageBox.Show("削除するデータを選択してください。");
+            }
+
+            //★すべてのデータを削除することができない…。
+            else
+            {
+                // 選択されている行のIDの値を取得
+                DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
+                var idValue = selectedRow.Cells["Id"].Value;
+                int targetId = Int32.Parse(idValue.ToString());
+
+                // 削除の確認メッセージ
+                DialogResult result = MessageBox.Show("選択されたデータを削除しますか？", "", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    // データを削除
+                    UserListDatabase users = new UserListDatabase();
+                    users.deleteDB(targetId);
+
+                    // データを取得
+                    //DataTable dataTable = users.loadDB();
+
+                    // DataGridViewにデータをバインドする
+                    //dataGridViewUsers.DataSource = dataTable;
+                }
+
+                // 使用者一覧情報を読み込む
+                loadData();
+            }
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            // 選択されている行のIDの値を取得
+            int targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
+            var idValue = selectedRow.Cells["Id"].Value;
+            int targetId = Int32.Parse(idValue.ToString());
+
+            // 編集ウィンドウを表示
+            UserEdit userEdit = new UserEdit();
+            userEdit.editTargetId = targetId;
+            userEdit.ShowDialog();
+
+            // 使用者一覧情報を読み込む
+            loadData();
+        }
+
+        private void loadData()
+        {
             // データを取得
             UserListDatabase users = new UserListDatabase();
             DataTable dataTable = users.loadDB();
@@ -66,76 +136,12 @@ namespace BusPassengerListCreationTool
                 columnCount++;
             }
 
+            // Idの列を非表示
+            dataGridViewUsers.Columns["Id"].Visible = false;
+
             // アクティブなセルの選択を解除する
             dataGridViewUsers.ClearSelection();
 
-            // Idの列を非表示
-            dataGridViewUsers.Columns["Id"].Visible = false;
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            int targetIndex = -1;
-
-            // 選択されている行を取得
-            //foreach (DataGridViewRow r in dataGridViewUsers.SelectedRows)
-            //{
-            //    targetIndex = r.Index;
-            //}
-            targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
-
-
-            //★初期状態で一行目が選択されているので不都合？
-            if (targetIndex == -1)
-            {
-                // 削除の確認メッセージ
-                MessageBox.Show("削除するデータを選択してください。");
-            }
-
-            //★すべてのデータを削除することができない…。
-            else
-            {
-                // 選択されている行のIDの値を取得
-                DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
-                var idValue = selectedRow.Cells["Id"].Value;
-                int targetId = Int32.Parse(idValue.ToString());
-
-                // 削除の確認メッセージ
-                DialogResult result = MessageBox.Show("選択されたデータを削除しますか？", "", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    // データを削除
-                    UserListDatabase users = new UserListDatabase();
-                    users.deleteDB(targetId);
-
-                    // データを取得
-                    DataTable dataTable = users.loadDB();
-
-                    // DataGridViewにデータをバインドする
-                    dataGridViewUsers.DataSource = dataTable;
-                }
-            }
-        }
-
-        private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            // 選択されている行のIDの値を取得
-            int targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
-            DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
-            var idValue = selectedRow.Cells["Id"].Value;
-            int targetId = Int32.Parse(idValue.ToString());
-
-            // 編集ウィンドウを表示
-            UserEdit userEdit = new UserEdit();
-            userEdit.editTargetId = targetId;
-            userEdit.ShowDialog();
-
-            // データを取得
-            UserListDatabase users = new UserListDatabase();
-            DataTable dataTable = users.loadDB();
-
-            // DataGridViewにデータをバインドする
-            dataGridViewUsers.DataSource = dataTable;
         }
     }
 }

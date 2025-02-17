@@ -19,14 +19,6 @@ namespace BusPassengerListCreationTool
             databaseLoad();
         }
 
-        private void buttonUserRegistration_Click(object sender, EventArgs e)
-        {
-            UserRegistration userRegistration = new UserRegistration();
-            userRegistration.ShowDialog();
-
-            databaseLoad();
-        }
-
         private void buttonUserList_Click(object sender, EventArgs e)
         {
             UserList userList = new UserList();

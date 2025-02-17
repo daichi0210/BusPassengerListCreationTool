@@ -32,6 +32,8 @@
             buttonEdit = new Button();
             buttonDelete = new Button();
             label1 = new Label();
+            buttonUserRegistration = new Button();
+            buttonClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +55,7 @@
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(12, 299);
+            buttonEdit.Location = new Point(93, 299);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(75, 23);
             buttonEdit.TabIndex = 1;
@@ -63,7 +65,7 @@
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(93, 299);
+            buttonDelete.Location = new Point(174, 299);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 23);
             buttonDelete.TabIndex = 4;
@@ -80,11 +82,33 @@
             label1.TabIndex = 5;
             label1.Text = "※編集・削除したい行を選択してからボタンを押してください";
             // 
+            // buttonUserRegistration
+            // 
+            buttonUserRegistration.Location = new Point(12, 299);
+            buttonUserRegistration.Name = "buttonUserRegistration";
+            buttonUserRegistration.Size = new Size(75, 23);
+            buttonUserRegistration.TabIndex = 6;
+            buttonUserRegistration.Text = "新規登録";
+            buttonUserRegistration.UseVisualStyleBackColor = true;
+            buttonUserRegistration.Click += buttonUserRegistration_Click;
+            // 
+            // buttonClose
+            // 
+            buttonClose.Location = new Point(335, 299);
+            buttonClose.Name = "buttonClose";
+            buttonClose.Size = new Size(75, 23);
+            buttonClose.TabIndex = 7;
+            buttonClose.Text = "閉じる";
+            buttonClose.UseVisualStyleBackColor = true;
+            buttonClose.Click += buttonClose_Click;
+            // 
             // UserList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonClose);
+            Controls.Add(buttonUserRegistration);
             Controls.Add(label1);
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
@@ -103,5 +127,7 @@
         private Button buttonEdit;
         private Button buttonDelete;
         private Label label1;
+        private Button buttonUserRegistration;
+        private Button buttonClose;
     }
 }

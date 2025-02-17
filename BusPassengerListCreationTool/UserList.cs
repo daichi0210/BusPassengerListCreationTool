@@ -25,6 +25,32 @@ namespace BusPassengerListCreationTool
             loadData();
         }
 
+        private void buttonUserRegistration_Click(object sender, EventArgs e)
+        {
+            UserRegistration userRegistration = new UserRegistration();
+            userRegistration.ShowDialog();
+
+            // 使用者一覧情報を読み込む
+            loadData();
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            // 選択されている行のIDの値を取得
+            int targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
+            var idValue = selectedRow.Cells["Id"].Value;
+            int targetId = Int32.Parse(idValue.ToString());
+
+            // 編集ウィンドウを表示
+            UserEdit userEdit = new UserEdit();
+            userEdit.editTargetId = targetId;
+            userEdit.ShowDialog();
+
+            // 使用者一覧情報を読み込む
+            loadData();
+        }
+
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             int targetIndex = -1;
@@ -72,21 +98,9 @@ namespace BusPassengerListCreationTool
             }
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
-            // 選択されている行のIDの値を取得
-            int targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
-            DataGridViewRow selectedRow = dataGridViewUsers.Rows[targetIndex];
-            var idValue = selectedRow.Cells["Id"].Value;
-            int targetId = Int32.Parse(idValue.ToString());
-
-            // 編集ウィンドウを表示
-            UserEdit userEdit = new UserEdit();
-            userEdit.editTargetId = targetId;
-            userEdit.ShowDialog();
-
-            // 使用者一覧情報を読み込む
-            loadData();
+            this.Close();
         }
 
         private void loadData()

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             buttonCreate = new Button();
-            buttonUserRegistration = new Button();
             buttonUserList = new Button();
             dateTimePicker1 = new DateTimePicker();
             label1 = new Label();
@@ -45,16 +44,6 @@
             buttonCreate.Text = "作成";
             buttonCreate.UseVisualStyleBackColor = true;
             buttonCreate.Click += buttonCreate_Click;
-            // 
-            // buttonUserRegistration
-            // 
-            buttonUserRegistration.Location = new Point(267, 41);
-            buttonUserRegistration.Name = "buttonUserRegistration";
-            buttonUserRegistration.Size = new Size(86, 23);
-            buttonUserRegistration.TabIndex = 1;
-            buttonUserRegistration.Text = "使用者登録";
-            buttonUserRegistration.UseVisualStyleBackColor = true;
-            buttonUserRegistration.Click += buttonUserRegistration_Click;
             // 
             // buttonUserList
             // 
@@ -100,7 +89,6 @@
             Controls.Add(label1);
             Controls.Add(dateTimePicker1);
             Controls.Add(buttonUserList);
-            Controls.Add(buttonUserRegistration);
             Controls.Add(buttonCreate);
             Name = "Main";
             Text = "あごころバス乗車名簿　作成ツール";
@@ -112,7 +100,6 @@
         #endregion
 
         private Button buttonCreate;
-        private Button buttonUserRegistration;
         private Button buttonUserList;
         private DateTimePicker dateTimePicker1;
         private Label label1;

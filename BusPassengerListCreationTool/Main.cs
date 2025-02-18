@@ -4,6 +4,7 @@ using System.Net;
 using System.Xml.Linq;
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Windows.Forms;
 
 namespace BusPassengerListCreationTool
 {
@@ -16,7 +17,24 @@ namespace BusPassengerListCreationTool
 
         private void Main_Load(object sender, EventArgs e)
         {
+            // データを読み込む
             databaseLoad();
+
+            // 設定情報を読み込み
+            Settings settings = new Settings();
+
+            // 本日の日付を取得
+            DateTime dateValue = DateTime.Now;
+            while (settings.getOperationDays() != dateValue.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture))
+            {
+                dateValue = dateValue.AddDays(1);
+            }
+
+            // 次回の運行日を代入
+            int operationYear = Int32.Parse(dateValue.ToString("yyyy", System.Globalization.CultureInfo.InvariantCulture));
+            int operationMonth = Int32.Parse(dateValue.ToString("MM", System.Globalization.CultureInfo.InvariantCulture));
+            int operationDate = Int32.Parse(dateValue.ToString("dd", System.Globalization.CultureInfo.InvariantCulture));
+            dateTimePickerOperationDays.Value = new DateTime(operationYear, operationMonth, operationDate);
         }
 
         private void buttonUserList_Click(object sender, EventArgs e)
@@ -80,20 +98,21 @@ namespace BusPassengerListCreationTool
 
 
 
-            // 本日の日付を取得
-            DateTime dateValue = DateTime.Now;
-            while (settings.getOperationDays() != dateValue.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture))
+            // 運行日の曜日を確認する
+            string dayOfWeek = dateTimePickerOperationDays.Value.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture);
+            string dayOfWeekJp = dateTimePickerOperationDays.Value.ToString("ddd");
+
+            if (dayOfWeek != settings.getOperationDays())
             {
-                dateValue = dateValue.AddDays(1);
+                DialogResult result = MessageBox.Show("運行日は" + dayOfWeekJp + "曜日です。このまま乗車名簿を作成しますか？", "", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
             }
 
-            // 次回の運行日を代入
-            MessageBox.Show("次の運航日：" + dateValue.ToString("yyyy年MM月dd日（ddd）", System.Globalization.CultureInfo.InvariantCulture));
-
-
-
-
             // リストを作成する
+            MessageBox.Show("作成完了！");
 
         }
     }

@@ -30,14 +30,14 @@
         {
             buttonCreate = new Button();
             buttonUserList = new Button();
-            dateTimePicker1 = new DateTimePicker();
+            dateTimePickerOperationDays = new DateTimePicker();
             label1 = new Label();
             checkedListBoxUserSelection = new CheckedListBox();
             SuspendLayout();
             // 
             // buttonCreate
             // 
-            buttonCreate.Location = new Point(267, 292);
+            buttonCreate.Location = new Point(291, 291);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(86, 23);
             buttonCreate.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // buttonUserList
             // 
-            buttonUserList.Location = new Point(267, 70);
+            buttonUserList.Location = new Point(291, 41);
             buttonUserList.Name = "buttonUserList";
             buttonUserList.Size = new Size(86, 23);
             buttonUserList.TabIndex = 3;
@@ -55,21 +55,21 @@
             buttonUserList.UseVisualStyleBackColor = true;
             buttonUserList.Click += buttonUserList_Click;
             // 
-            // dateTimePicker1
+            // dateTimePickerOperationDays
             // 
-            dateTimePicker1.Location = new Point(61, 12);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 4;
+            dateTimePickerOperationDays.Location = new Point(85, 12);
+            dateTimePickerOperationDays.Name = "dateTimePickerOperationDays";
+            dateTimePickerOperationDays.Size = new Size(200, 23);
+            dateTimePickerOperationDays.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(12, 16);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(67, 15);
             label1.TabIndex = 5;
-            label1.Text = "乗車日";
+            label1.Text = "次回運行日";
             // 
             // checkedListBoxUserSelection
             // 
@@ -77,17 +77,17 @@
             checkedListBoxUserSelection.FormattingEnabled = true;
             checkedListBoxUserSelection.Location = new Point(12, 41);
             checkedListBoxUserSelection.Name = "checkedListBoxUserSelection";
-            checkedListBoxUserSelection.Size = new Size(249, 274);
+            checkedListBoxUserSelection.Size = new Size(273, 274);
             checkedListBoxUserSelection.TabIndex = 7;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(364, 326);
+            ClientSize = new Size(384, 326);
             Controls.Add(checkedListBoxUserSelection);
             Controls.Add(label1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dateTimePickerOperationDays);
             Controls.Add(buttonUserList);
             Controls.Add(buttonCreate);
             Name = "Main";
@@ -101,7 +101,7 @@
 
         private Button buttonCreate;
         private Button buttonUserList;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePickerOperationDays;
         private Label label1;
         private CheckedListBox checkedListBoxUserSelection;
     }

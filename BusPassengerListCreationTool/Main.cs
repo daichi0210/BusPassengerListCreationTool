@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace BusPassengerListCreationTool
 {
@@ -70,7 +71,6 @@ namespace BusPassengerListCreationTool
                 //MessageBox.Show(id.ToString());
                 checkedListBoxUserSelection.Items.Add(name);
             }
-
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -112,22 +112,51 @@ namespace BusPassengerListCreationTool
             }
 
 
-
-            // 乗車する人の情報をリストに追加する
-/*
+            // IdとNameを辞書で管理
             UserListDatabase users = new UserListDatabase();
-            string[] userData = users.getDB();
+            var userInfo = new Dictionary<int, string>();
+            userInfo = users.getUserInfo();
 
-            foreach (string ud in userData)
+
+            //★同姓同名が存在しない前提
+            // 乗車する人の情報をリストに追加する
+            int[] ids = new int[0];
+            int count = 0;
+
+            foreach (string item in checkedListBoxUserSelection.CheckedItems)
             {
-                // 乗車する人に選択されている場合
-                //★チェックされているIdを渡す
-                if ()
+                foreach (var data in userInfo)
                 {
-                    MessageBox.Show(ud);
+                    if (item == data.Value)
+                    {
+                        Array.Resize(ref ids, count + 1);
+                        ids[count] = data.Key;
+                        count++;
+
+                        MessageBox.Show(data.Key +":" + data.Value);
+                    }
                 }
+
             }
-*/
+
+            // 乗車する人の情報を取得する
+            
+
+
+            /*
+                        UserListDatabase users = new UserListDatabase();
+                        string[] userData = users.getDB();
+
+                        foreach (string ud in userData)
+                        {
+                            // 乗車する人に選択されている場合
+                            //★チェックされているIdを渡す
+                            if ()
+                            {
+                                MessageBox.Show(ud);
+                            }
+                        }
+            */
 
 
 

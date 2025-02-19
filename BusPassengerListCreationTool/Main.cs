@@ -51,12 +51,26 @@ namespace BusPassengerListCreationTool
             checkedListBoxUserSelection.Items.Clear();
 
             UserListDatabase users = new UserListDatabase();
-            string[] names = users.loadName();
+            /*
 
-            foreach (string name in names)
+                        string[] names = users.loadName();
+
+                        foreach (string name in names)
+                        {
+                            checkedListBoxUserSelection.Items.Add(name);
+                        }
+            */
+
+            // IdとNameを辞書で管理
+            var userInfo = new Dictionary<int, string>();
+            userInfo = users.getUserInfo();
+
+            foreach (string name in userInfo.Values)
             {
+                //MessageBox.Show(id.ToString());
                 checkedListBoxUserSelection.Items.Add(name);
             }
+
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -84,20 +98,6 @@ namespace BusPassengerListCreationTool
                 return;
             }
 
-            //// 乗車する人の情報をリストに追加する
-            UserListDatabase users = new UserListDatabase();
-            string[] userData = users.getDB();
-
-            foreach (string ud in userData)
-            {
-                //MessageBox.Show(ud);
-            }
-
-            // 選択されている項目を取得
-            //★チェックされているIdを渡す
-
-
-
             // 運行日の曜日を確認する
             string dayOfWeek = dateTimePickerOperationDays.Value.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture);
             string dayOfWeekJp = dateTimePickerOperationDays.Value.ToString("ddd");
@@ -110,6 +110,27 @@ namespace BusPassengerListCreationTool
                     return;
                 }
             }
+
+
+
+            // 乗車する人の情報をリストに追加する
+/*
+            UserListDatabase users = new UserListDatabase();
+            string[] userData = users.getDB();
+
+            foreach (string ud in userData)
+            {
+                // 乗車する人に選択されている場合
+                //★チェックされているIdを渡す
+                if ()
+                {
+                    MessageBox.Show(ud);
+                }
+            }
+*/
+
+
+
 
             // リストを作成する
             MessageBox.Show("作成完了！");

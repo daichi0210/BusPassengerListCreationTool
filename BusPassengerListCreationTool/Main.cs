@@ -120,7 +120,8 @@ namespace BusPassengerListCreationTool
 
             //★同姓同名が存在しない前提
             // 乗車する人の情報をリストに追加する
-            int[] ids = new int[0];
+            //int[] ids = new int[0];
+            UserInfo[] ui = Array.Empty<UserInfo>();
             int count = 0;
 
             foreach (string item in checkedListBoxUserSelection.CheckedItems)
@@ -129,18 +130,34 @@ namespace BusPassengerListCreationTool
                 {
                     if (item == data.Value)
                     {
-                        Array.Resize(ref ids, count + 1);
-                        ids[count] = data.Key;
+                        Array.Resize(ref ui, count + 1);
+                        //MessageBox.Show(data.Key +":" + data.Value);
+
+                        DataTable userData = users.getUserData(data.Key);
+
+                        // 使用者情報を代入
+                        ui[count].Name = userData.Rows[0]["Name"].ToString();
+                        ui[count].Address = userData.Rows[0]["Address"].ToString();
+                        ui[count].Tel = userData.Rows[0]["TEL"].ToString();
+                        ui[count].BusStop= userData.Rows[0]["BusStop"].ToString();
+                        ui[count].Remarks = userData.Rows[0]["Remarks"].ToString();
+
+                        //Array.Resize(ref ids, count + 1);
+                        //ids[count] = data.Key;
                         count++;
 
-                        MessageBox.Show(data.Key +":" + data.Value);
+                        break;
                     }
                 }
+                MessageBox.Show(count.ToString());
+            }
 
+            foreach (UserInfo i in ui)
+            {
+                //MessageBox.Show(i.name + "," + i.address + "," + i.TEL + "," + i.busStop + "," + i.remarks );
             }
 
             // 乗車する人の情報を取得する
-            
 
 
             /*
@@ -157,6 +174,9 @@ namespace BusPassengerListCreationTool
                             }
                         }
             */
+
+
+            // バス停の順番に並び替える
 
 
 

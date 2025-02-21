@@ -119,8 +119,7 @@ namespace BusPassengerListCreationTool
 
 
             //★同姓同名が存在しない前提
-            // 乗車する人の情報をリストに追加する
-            //int[] ids = new int[0];
+            // 乗車する人の情報を取得する
             UserInfo[] ui = Array.Empty<UserInfo>();
             int count = 0;
 
@@ -130,53 +129,36 @@ namespace BusPassengerListCreationTool
                 {
                     if (item == data.Value)
                     {
+                        // 配列を拡張
                         Array.Resize(ref ui, count + 1);
-                        //MessageBox.Show(data.Key +":" + data.Value);
+                        
+                        // 配列を初期化
+                        ui[count] = new UserInfo();
 
+                        //
                         DataTable userData = users.getUserData(data.Key);
 
                         // 使用者情報を代入
                         ui[count].Name = userData.Rows[0]["Name"].ToString();
                         ui[count].Address = userData.Rows[0]["Address"].ToString();
                         ui[count].Tel = userData.Rows[0]["TEL"].ToString();
-                        ui[count].BusStop= userData.Rows[0]["BusStop"].ToString();
+                        ui[count].BusStop = userData.Rows[0]["BusStop"].ToString();
                         ui[count].Remarks = userData.Rows[0]["Remarks"].ToString();
 
-                        //Array.Resize(ref ids, count + 1);
-                        //ids[count] = data.Key;
                         count++;
 
                         break;
                     }
+                    //MessageBox.Show(data.Value);
                 }
-                MessageBox.Show(count.ToString());
             }
 
             foreach (UserInfo i in ui)
             {
-                //MessageBox.Show(i.name + "," + i.address + "," + i.TEL + "," + i.busStop + "," + i.remarks );
+                MessageBox.Show(i.Name + "," + i.Address + "," + i.Tel + "," + i.BusStop + "," + i.Remarks );
             }
 
-            // 乗車する人の情報を取得する
-
-
-            /*
-                        UserListDatabase users = new UserListDatabase();
-                        string[] userData = users.getDB();
-
-                        foreach (string ud in userData)
-                        {
-                            // 乗車する人に選択されている場合
-                            //★チェックされているIdを渡す
-                            if ()
-                            {
-                                MessageBox.Show(ud);
-                            }
-                        }
-            */
-
-
-            // バス停の順番に並び替える
+            // 乗客リストをバス停の順番に並び替える
 
 
 

@@ -8,36 +8,45 @@ namespace BusPassengerListCreationTool
 {
     class UserInfo
     {
-        private string name;    // 名前
-        private string address;  // 住所
-        private string tel;      // 電話番号
-        private string busStop;  // 乗車バス停
-        private string remarks;  // 備考
-
+        private string _name;    // 名前
+        private string _address;  // 住所
+        private string _tel;      // 電話番号
+        private string _busStop;  // 乗車バス停
+        private string _remarks;  // 備考
+/*
+        public UserInfo(string name, string address, string tel, string busStop, string remarks)
+        {
+            _name = name;
+            _address = address;
+            _tel = tel;
+            _busStop = busStop;
+            _remarks = remarks;
+        }
+*/
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
         public string Address
         {
-            get { return address; }
-            set { address = value; }
+            get { return _address; }
+            set { _address = value; }
         }
         public string Tel
         {
-            get { return tel; }
-            set { tel = value; }
+            get { return _tel; }
+            set { _tel = value; }
         }
         public string BusStop
         {
-            get { return busStop; }
-            set { busStop = value; }
+            get { return _busStop; }
+            set { _busStop = value; }
         }
         public string Remarks
         {
-            get { return remarks; }
-            set { remarks = value; }
+            get { return _remarks; }
+            set { _remarks = value; }
         }
     }
 }

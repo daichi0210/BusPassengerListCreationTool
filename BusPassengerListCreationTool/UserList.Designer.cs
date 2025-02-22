@@ -109,6 +109,7 @@
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
+            MinimumSize = new Size(470, 280);
             Name = "UserList";
             Text = "使用者一覧";
             Load += UserList_Load;

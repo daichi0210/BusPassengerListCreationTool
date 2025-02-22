@@ -31,7 +31,6 @@
             dataGridViewUsers = new DataGridView();
             buttonEdit = new Button();
             buttonDelete = new Button();
-            label1 = new Label();
             buttonUserRegistration = new Button();
             buttonClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
@@ -43,6 +42,9 @@
             dataGridViewUsers.AllowUserToDeleteRows = false;
             dataGridViewUsers.AllowUserToResizeColumns = false;
             dataGridViewUsers.AllowUserToResizeRows = false;
+            dataGridViewUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewUsers.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewUsers.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewUsers.Location = new Point(12, 12);
@@ -50,12 +52,13 @@
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersVisible = false;
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewUsers.Size = new Size(776, 265);
+            dataGridViewUsers.Size = new Size(430, 191);
             dataGridViewUsers.TabIndex = 0;
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(93, 299);
+            buttonEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonEdit.Location = new Point(93, 209);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(75, 23);
             buttonEdit.TabIndex = 1;
@@ -65,7 +68,8 @@
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(174, 299);
+            buttonDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonDelete.Location = new Point(174, 209);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 23);
             buttonDelete.TabIndex = 4;
@@ -73,18 +77,10 @@
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 325);
-            label1.Name = "label1";
-            label1.Size = new Size(281, 15);
-            label1.TabIndex = 5;
-            label1.Text = "※編集・削除したい行を選択してからボタンを押してください";
-            // 
             // buttonUserRegistration
             // 
-            buttonUserRegistration.Location = new Point(12, 299);
+            buttonUserRegistration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonUserRegistration.Location = new Point(12, 209);
             buttonUserRegistration.Name = "buttonUserRegistration";
             buttonUserRegistration.Size = new Size(75, 23);
             buttonUserRegistration.TabIndex = 6;
@@ -94,7 +90,8 @@
             // 
             // buttonClose
             // 
-            buttonClose.Location = new Point(335, 299);
+            buttonClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonClose.Location = new Point(367, 209);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 7;
@@ -106,10 +103,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(454, 241);
             Controls.Add(buttonClose);
             Controls.Add(buttonUserRegistration);
-            Controls.Add(label1);
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
@@ -118,7 +114,6 @@
             Load += UserList_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -126,7 +121,6 @@
         private DataGridView dataGridViewUsers;
         private Button buttonEdit;
         private Button buttonDelete;
-        private Label label1;
         private Button buttonUserRegistration;
         private Button buttonClose;
     }

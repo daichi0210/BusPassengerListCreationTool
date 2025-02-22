@@ -6,6 +6,7 @@ using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Collections.Immutable;
 
 namespace BusPassengerListCreationTool
 {

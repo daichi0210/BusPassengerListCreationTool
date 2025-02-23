@@ -95,6 +95,7 @@
             Controls.Add(buttonCreate);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Main";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "あごころバス乗車名簿　作成ツール";
             Load += Main_Load;
             ResumeLayout(false);

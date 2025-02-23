@@ -163,6 +163,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "UserRegistration";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "使用者登録";
             Load += UserRegistration_Load;
             ResumeLayout(false);

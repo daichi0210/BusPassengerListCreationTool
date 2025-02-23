@@ -153,6 +153,24 @@ namespace BusPassengerListCreationTool
             // Idの列を非表示
             dataGridViewUsers.Columns["Id"].Visible = false;
 
+            //
+            dataGridViewUsers.RowTemplate.Height = 40;
+
+/*
+            MessageBox.Show(dataGridViewUsers.RowCount.ToString());
+
+            // dataGridViewの高さを動的に変更（最下部に余白ができるため）
+            int hi = dataGridViewUsers.Height;
+            int ch = dataGridViewUsers.ColumnHeadersHeight;
+            int h = dataGridViewUsers.RowTemplate.Height;
+            int n = dataGridViewUsers.RowCount;
+
+            MessageBox.Show(hi.ToString());
+            hi = ch + h * n;
+            dataGridViewUsers.Height = hi;
+            MessageBox.Show(hi.ToString());
+*/
+
             // アクティブなセルの選択を解除する
             dataGridViewUsers.ClearSelection();
 

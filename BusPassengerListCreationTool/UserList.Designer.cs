@@ -44,13 +44,14 @@
             dataGridViewUsers.AllowUserToResizeRows = false;
             dataGridViewUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewUsers.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dataGridViewUsers.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewUsers.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewUsers.Location = new Point(12, 12);
             dataGridViewUsers.MultiSelect = false;
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersVisible = false;
+            dataGridViewUsers.RowTemplate.Height = 35;
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewUsers.Size = new Size(640, 191);
             dataGridViewUsers.TabIndex = 0;
@@ -111,6 +112,7 @@
             Controls.Add(dataGridViewUsers);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "UserList";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "使用者一覧";
             Load += UserList_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();

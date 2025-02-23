@@ -163,6 +163,7 @@
             Controls.Add(buttonSave);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "UserEdit";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "使用者情報編集";
             Load += UserEdit_Load;
             ResumeLayout(false);

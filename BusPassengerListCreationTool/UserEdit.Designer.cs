@@ -161,6 +161,7 @@
             Controls.Add(label1);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "UserEdit";
             Text = "使用者情報編集";
             Load += UserEdit_Load;

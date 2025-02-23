@@ -52,7 +52,7 @@
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersVisible = false;
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewUsers.Size = new Size(430, 191);
+            dataGridViewUsers.Size = new Size(640, 191);
             dataGridViewUsers.TabIndex = 0;
             // 
             // buttonEdit
@@ -91,7 +91,7 @@
             // buttonClose
             // 
             buttonClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonClose.Location = new Point(367, 209);
+            buttonClose.Location = new Point(577, 209);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 7;
@@ -103,13 +103,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(454, 241);
+            ClientSize = new Size(664, 241);
             Controls.Add(buttonClose);
             Controls.Add(buttonUserRegistration);
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
-            MinimumSize = new Size(470, 280);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "UserList";
             Text = "使用者一覧";
             Load += UserList_Load;

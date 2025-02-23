@@ -37,6 +37,7 @@
             // 
             // buttonCreate
             // 
+            buttonCreate.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             buttonCreate.Location = new Point(291, 291);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(86, 23);
@@ -47,6 +48,7 @@
             // 
             // buttonUserList
             // 
+            buttonUserList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             buttonUserList.Location = new Point(291, 41);
             buttonUserList.Name = "buttonUserList";
             buttonUserList.Size = new Size(86, 23);
@@ -73,6 +75,7 @@
             // 
             // checkedListBoxUserSelection
             // 
+            checkedListBoxUserSelection.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             checkedListBoxUserSelection.CheckOnClick = true;
             checkedListBoxUserSelection.FormattingEnabled = true;
             checkedListBoxUserSelection.Location = new Point(12, 41);
@@ -90,6 +93,7 @@
             Controls.Add(dateTimePickerOperationDays);
             Controls.Add(buttonUserList);
             Controls.Add(buttonCreate);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Main";
             Text = "あごころバス乗車名簿　作成ツール";
             Load += Main_Load;

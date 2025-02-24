@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Collections.Immutable;
 
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
+
 namespace BusPassengerListCreationTool
 {
     public partial class Main : Form
@@ -160,6 +163,45 @@ namespace BusPassengerListCreationTool
             }
 
             // 乗客リストをバス停の順番に並び替える
+
+
+            // Excelに出力
+            var excelApp = new Excel.Application();
+            var wbs = excelApp?.Workbooks;
+            var wb = wbs.Add();
+            var wss = wb?.Sheets;
+            var ws = wss[1] as Excel.Worksheet;
+            var targetRange = ws?.Range["A1:A10"] as Excel.Range;
+            var columns = targetRange?.Columns as Excel.Range;
+
+            if (excelApp is not null && wb is not null && ws is not null && targetRange is not null)
+            {
+                try
+                {
+                    excelApp.Visible = true;
+                    var startDate = DateTime.Today;
+                    var dates = new DateTime[10];
+                    for (int i = 0; i < 10; i++)
+                    {
+                        dates[i] = startDate.AddDays(i);
+                    }
+                    targetRange.NumberFormat = "yyyy年mm月dd日";
+                    targetRange.Value = dates;
+                    columns.AutoFit();
+                }
+                finally
+                {
+#pragma warning disable CA1416
+                    Marshal.ReleaseComObject(columns);
+                    Marshal.ReleaseComObject(targetRange);
+                    Marshal.ReleaseComObject(ws);
+                    Marshal.ReleaseComObject(wss);
+                    Marshal.ReleaseComObject(wb);
+                    Marshal.ReleaseComObject(wbs);
+                    Marshal.ReleaseComObject(excelApp);
+#pragma warning restore CA1416
+                }
+            }
 
 
 

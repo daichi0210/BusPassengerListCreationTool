@@ -165,6 +165,21 @@ namespace BusPassengerListCreationTool
             // 乗客リストをバス停の順番に並び替える
 
 
+
+            ////
+            //
+            string fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + "乗客リスト" + ".xlsx";
+
+            // テンプレートファイルをコピー
+            File.Copy("template\\_busPassengerList.xlsx", "application forms\\" + fileName);
+
+            // 現在のディレクトリを取得
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            // 現在のディレクトリからの相対パスを作成
+            // Excelファイル
+            string wordFile = Path.Combine(currentDirectory, "application forms\\" + fileName);
+
             // Excelに出力
             var excelApp = new Excel.Application();
             var wbs = excelApp?.Workbooks;

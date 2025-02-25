@@ -8,8 +8,11 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Collections.Immutable;
 
-using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
+// Excel操作用
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
+// Excel起動用
+using System.Diagnostics;
 
 namespace BusPassengerListCreationTool
 {
@@ -167,58 +170,38 @@ namespace BusPassengerListCreationTool
 
 
             ////
-            //
-            string fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "-" + "乗客リスト" + ".xlsx";
+            //★運行日の日付にするdayOfWeek
+            string fileName = "あごころ乗車名簿_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
 
             // テンプレートファイルをコピー
-            File.Copy("template\\_busPassengerList.xlsx", "application forms\\" + fileName);
+            //★上書き確認
+            //★フォルダがない場合
+            //★テンプレートがない場合
+            //File.Copy("template\\_busPassengerList.xlsx", "bus passenger list\\" + fileName);
 
             // 現在のディレクトリを取得
             string currentDirectory = Directory.GetCurrentDirectory();
 
             // 現在のディレクトリからの相対パスを作成
             // Excelファイル
-            string wordFile = Path.Combine(currentDirectory, "application forms\\" + fileName);
+            //string excelFile = Path.Combine(currentDirectory, "bus passenger list\\" + fileName);
+            string excelFile = Path.Combine(currentDirectory, "template\\_busPassengerList.xlsx");
+
+            // Excelの実行ファイルのパスを指定
+            string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
+            // 読み込み
+            using (var wb = new XLWorkbook(excelFile))
+            {
+                
+            }
+            // 読み込み
 
             // Excelに出力
-            var excelApp = new Excel.Application();
-            var wbs = excelApp?.Workbooks;
-            var wb = wbs.Add();
-            var wss = wb?.Sheets;
-            var ws = wss[1] as Excel.Worksheet;
-            var targetRange = ws?.Range["A1:A10"] as Excel.Range;
-            var columns = targetRange?.Columns as Excel.Range;
-
-            if (excelApp is not null && wb is not null && ws is not null && targetRange is not null)
-            {
-                try
-                {
-                    excelApp.Visible = true;
-                    var startDate = DateTime.Today;
-                    var dates = new DateTime[10];
-                    for (int i = 0; i < 10; i++)
-                    {
-                        dates[i] = startDate.AddDays(i);
-                    }
-                    targetRange.NumberFormat = "yyyy年mm月dd日";
-                    targetRange.Value = dates;
-                    columns.AutoFit();
-                }
-                finally
-                {
-#pragma warning disable CA1416
-                    Marshal.ReleaseComObject(columns);
-                    Marshal.ReleaseComObject(targetRange);
-                    Marshal.ReleaseComObject(ws);
-                    Marshal.ReleaseComObject(wss);
-                    Marshal.ReleaseComObject(wb);
-                    Marshal.ReleaseComObject(wbs);
-                    Marshal.ReleaseComObject(excelApp);
-#pragma warning restore CA1416
-                }
-            }
 
 
+            // Excelを開く
+            //★開き方を要検討。Excelファイルで書き出すだけでいいかも
+            Process.Start(excelPath, excelFile);
 
 
             // リストを作成する

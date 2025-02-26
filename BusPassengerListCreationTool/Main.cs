@@ -186,27 +186,53 @@ namespace BusPassengerListCreationTool
             // 現在のディレクトリからの相対パスを作成
             // Excelファイル
             //string excelFile = Path.Combine(currentDirectory, "bus passenger list\\" + fileName);
-            string excelFile = Path.Combine(currentDirectory, "template\\_busPassengerList.xlsx");
+            //string excelFile = Path.Combine(currentDirectory, "template\\_busPassengerList.xlsx");
+            string excelFile = Path.Combine(currentDirectory, "template\\" + fileName);
 
             // Excelの実行ファイルのパスを指定
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
             
-            // 書き込み
-            using (var wb = new XLWorkbook(excelFile))
+            // Excelファイルに出力
+            //using (var wb = new XLWorkbook(excelFile))
+            using (var wb = new XLWorkbook())
             {
                 var ws = wb.AddWorksheet("乗車名簿");
                 var row = ws.Row(1);
                 var column = ws.Column(1);
-                
-                var cell = ws.Cell("A1");
 
-                cell.Value = "Sample";
 
-                wb.SaveAs("template\\a.xlsx");
+
+                // 開始行を指定
+                int startRow = 1;
+                // 開始列を指定
+                int startColumn = 1;
+
+                // 開始セルを指定
+                var cell = ws.Cell(startColumn, startRow);
+
+                // ヘッダー
+                ws.Cell(startRow, startColumn).Value = "名前";
+                ws.Cell(startRow, startColumn + 1).Value = "住所";
+                ws.Cell(startRow, startColumn + 2).Value = "電話番号";
+                ws.Cell(startRow, startColumn + 3).Value = "バス停";
+                ws.Cell(startRow, startColumn + 4).Value = "備考";
+
+                startRow++;
+
+                // 各セルへ値を代入
+                foreach (UserInfo uis in ui)
+                {
+                    ws.Cell(startRow, startColumn).Value = uis.Name;
+                    ws.Cell(startRow, startColumn + 1).Value = uis.Address;
+                    ws.Cell(startRow, startColumn + 2).Value = uis.Tel;
+                    ws.Cell(startRow, startColumn + 3).Value = uis.BusStop;
+                    ws.Cell(startRow, startColumn + 4).Value = uis.Remarks;
+
+                    startRow++;
+                }
+
+                wb.SaveAs("template\\" + fileName);
             }
-
-            // Excelに出力
-
 
             // Excelを開く
             //★開き方を要検討。Excelファイルで書き出すだけでいいかも

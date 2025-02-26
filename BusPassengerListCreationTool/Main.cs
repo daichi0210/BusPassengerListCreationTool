@@ -13,6 +13,7 @@ using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 // Excel起動用
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace BusPassengerListCreationTool
 {
@@ -189,12 +190,20 @@ namespace BusPassengerListCreationTool
 
             // Excelの実行ファイルのパスを指定
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
-            // 読み込み
+            
+            // 書き込み
             using (var wb = new XLWorkbook(excelFile))
             {
+                var ws = wb.AddWorksheet("乗車名簿");
+                var row = ws.Row(1);
+                var column = ws.Column(1);
                 
+                var cell = ws.Cell("A1");
+
+                cell.Value = "Sample";
+
+                wb.SaveAs("template\\a.xlsx");
             }
-            // 読み込み
 
             // Excelに出力
 

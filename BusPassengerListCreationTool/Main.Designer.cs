@@ -41,7 +41,7 @@
             buttonCreate.Location = new Point(291, 291);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(86, 23);
-            buttonCreate.TabIndex = 0;
+            buttonCreate.TabIndex = 3;
             buttonCreate.Text = "作成";
             buttonCreate.UseVisualStyleBackColor = true;
             buttonCreate.Click += buttonCreate_Click;
@@ -52,7 +52,7 @@
             buttonUserList.Location = new Point(291, 41);
             buttonUserList.Name = "buttonUserList";
             buttonUserList.Size = new Size(86, 23);
-            buttonUserList.TabIndex = 3;
+            buttonUserList.TabIndex = 2;
             buttonUserList.Text = "使用者一覧";
             buttonUserList.UseVisualStyleBackColor = true;
             buttonUserList.Click += buttonUserList_Click;
@@ -62,7 +62,7 @@
             dateTimePickerOperationDays.Location = new Point(85, 12);
             dateTimePickerOperationDays.Name = "dateTimePickerOperationDays";
             dateTimePickerOperationDays.Size = new Size(200, 23);
-            dateTimePickerOperationDays.TabIndex = 4;
+            dateTimePickerOperationDays.TabIndex = 0;
             // 
             // label1
             // 
@@ -70,7 +70,7 @@
             label1.Location = new Point(12, 16);
             label1.Name = "label1";
             label1.Size = new Size(67, 15);
-            label1.TabIndex = 5;
+            label1.TabIndex = 4;
             label1.Text = "次回運行日";
             // 
             // checkedListBoxUserSelection
@@ -81,7 +81,7 @@
             checkedListBoxUserSelection.Location = new Point(12, 41);
             checkedListBoxUserSelection.Name = "checkedListBoxUserSelection";
             checkedListBoxUserSelection.Size = new Size(273, 274);
-            checkedListBoxUserSelection.TabIndex = 7;
+            checkedListBoxUserSelection.TabIndex = 1;
             // 
             // Main
             // 

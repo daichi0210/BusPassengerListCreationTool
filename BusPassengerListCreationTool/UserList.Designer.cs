@@ -54,7 +54,7 @@
             dataGridViewUsers.RowTemplate.Height = 35;
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewUsers.Size = new Size(640, 191);
-            dataGridViewUsers.TabIndex = 0;
+            dataGridViewUsers.TabIndex = 4;
             // 
             // buttonEdit
             // 
@@ -73,7 +73,7 @@
             buttonDelete.Location = new Point(174, 209);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 23);
-            buttonDelete.TabIndex = 4;
+            buttonDelete.TabIndex = 2;
             buttonDelete.Text = "削除";
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
@@ -84,7 +84,7 @@
             buttonUserRegistration.Location = new Point(12, 209);
             buttonUserRegistration.Name = "buttonUserRegistration";
             buttonUserRegistration.Size = new Size(75, 23);
-            buttonUserRegistration.TabIndex = 6;
+            buttonUserRegistration.TabIndex = 0;
             buttonUserRegistration.Text = "新規登録";
             buttonUserRegistration.UseVisualStyleBackColor = true;
             buttonUserRegistration.Click += buttonUserRegistration_Click;
@@ -95,7 +95,7 @@
             buttonClose.Location = new Point(577, 209);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
-            buttonClose.TabIndex = 7;
+            buttonClose.TabIndex = 3;
             buttonClose.Text = "閉じる";
             buttonClose.UseVisualStyleBackColor = true;
             buttonClose.Click += buttonClose_Click;

@@ -48,7 +48,7 @@
             label1.Location = new Point(12, 15);
             label1.Name = "label1";
             label1.Size = new Size(31, 15);
-            label1.TabIndex = 0;
+            label1.TabIndex = 7;
             label1.Text = "名前";
             // 
             // label2
@@ -57,7 +57,7 @@
             label2.Location = new Point(12, 44);
             label2.Name = "label2";
             label2.Size = new Size(31, 15);
-            label2.TabIndex = 1;
+            label2.TabIndex = 8;
             label2.Text = "住所";
             // 
             // label3
@@ -66,7 +66,7 @@
             label3.Location = new Point(12, 73);
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
-            label3.TabIndex = 2;
+            label3.TabIndex = 9;
             label3.Text = "電話番号";
             // 
             // label4
@@ -75,7 +75,7 @@
             label4.Location = new Point(12, 102);
             label4.Name = "label4";
             label4.Size = new Size(38, 15);
-            label4.TabIndex = 3;
+            label4.TabIndex = 10;
             label4.Text = "バス停";
             // 
             // label5
@@ -84,7 +84,7 @@
             label5.Location = new Point(12, 131);
             label5.Name = "label5";
             label5.Size = new Size(31, 15);
-            label5.TabIndex = 4;
+            label5.TabIndex = 11;
             label5.Text = "備考";
             // 
             // textBoxName
@@ -92,28 +92,28 @@
             textBoxName.Location = new Point(90, 12);
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(100, 23);
-            textBoxName.TabIndex = 5;
+            textBoxName.TabIndex = 0;
             // 
             // textBoxAddress
             // 
             textBoxAddress.Location = new Point(90, 41);
             textBoxAddress.Name = "textBoxAddress";
             textBoxAddress.Size = new Size(100, 23);
-            textBoxAddress.TabIndex = 6;
+            textBoxAddress.TabIndex = 1;
             // 
             // textBoxTEL
             // 
             textBoxTEL.Location = new Point(90, 70);
             textBoxTEL.Name = "textBoxTEL";
             textBoxTEL.Size = new Size(100, 23);
-            textBoxTEL.TabIndex = 7;
+            textBoxTEL.TabIndex = 2;
             // 
             // textBoxRemarks
             // 
             textBoxRemarks.Location = new Point(90, 128);
             textBoxRemarks.Name = "textBoxRemarks";
             textBoxRemarks.Size = new Size(100, 23);
-            textBoxRemarks.TabIndex = 8;
+            textBoxRemarks.TabIndex = 4;
             // 
             // comboBoxBusStop
             // 
@@ -122,14 +122,14 @@
             comboBoxBusStop.Location = new Point(90, 99);
             comboBoxBusStop.Name = "comboBoxBusStop";
             comboBoxBusStop.Size = new Size(100, 23);
-            comboBoxBusStop.TabIndex = 9;
+            comboBoxBusStop.TabIndex = 3;
             // 
             // buttonRegistration
             // 
             buttonRegistration.Location = new Point(12, 157);
             buttonRegistration.Name = "buttonRegistration";
             buttonRegistration.Size = new Size(75, 23);
-            buttonRegistration.TabIndex = 10;
+            buttonRegistration.TabIndex = 5;
             buttonRegistration.Text = "登録";
             buttonRegistration.UseVisualStyleBackColor = true;
             buttonRegistration.Click += buttonRegistration_Click;
@@ -139,7 +139,7 @@
             buttonCancel.Location = new Point(115, 157);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
-            buttonCancel.TabIndex = 11;
+            buttonCancel.TabIndex = 6;
             buttonCancel.Text = "キャンセル";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;

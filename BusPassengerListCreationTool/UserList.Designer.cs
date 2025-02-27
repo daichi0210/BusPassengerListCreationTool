@@ -43,7 +43,7 @@
             dataGridViewUsers.AllowUserToResizeColumns = false;
             dataGridViewUsers.AllowUserToResizeRows = false;
             dataGridViewUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewUsers.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewUsers.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -53,13 +53,13 @@
             dataGridViewUsers.RowHeadersVisible = false;
             dataGridViewUsers.RowTemplate.Height = 35;
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewUsers.Size = new Size(640, 191);
+            dataGridViewUsers.Size = new Size(640, 331);
             dataGridViewUsers.TabIndex = 4;
             // 
             // buttonEdit
             // 
             buttonEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonEdit.Location = new Point(93, 209);
+            buttonEdit.Location = new Point(93, 349);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(75, 23);
             buttonEdit.TabIndex = 1;
@@ -70,7 +70,7 @@
             // buttonDelete
             // 
             buttonDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonDelete.Location = new Point(174, 209);
+            buttonDelete.Location = new Point(174, 349);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(75, 23);
             buttonDelete.TabIndex = 2;
@@ -81,7 +81,7 @@
             // buttonUserRegistration
             // 
             buttonUserRegistration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonUserRegistration.Location = new Point(12, 209);
+            buttonUserRegistration.Location = new Point(12, 349);
             buttonUserRegistration.Name = "buttonUserRegistration";
             buttonUserRegistration.Size = new Size(75, 23);
             buttonUserRegistration.TabIndex = 0;
@@ -92,7 +92,7 @@
             // buttonClose
             // 
             buttonClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonClose.Location = new Point(577, 209);
+            buttonClose.Location = new Point(577, 349);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 3;
@@ -104,13 +104,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(664, 241);
+            ClientSize = new Size(664, 381);
             Controls.Add(buttonClose);
             Controls.Add(buttonUserRegistration);
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MinimumSize = new Size(680, 420);
             Name = "UserList";
             StartPosition = FormStartPosition.CenterParent;
             Text = "使用者一覧";

@@ -153,6 +153,9 @@ namespace BusPassengerListCreationTool
             // Idの列を非表示
             dataGridViewUsers.Columns["Id"].Visible = false;
 
+            // 備考欄を自動調整
+            dataGridViewUsers.Columns["Remarks"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             //
             dataGridViewUsers.RowTemplate.Height = 40;
 

@@ -161,14 +161,23 @@ namespace BusPassengerListCreationTool
                 }
             }
 
-            foreach (UserInfo i in ui)
-            {
-                MessageBox.Show(i.Name + "," + i.Address + "," + i.Tel + "," + i.BusStop + "," + i.Remarks );
-            }
-
             // 乗客リストをバス停の順番に並び替える
+            UserInfo[] uiBusStopOrder = new UserInfo[ui.Length];
+            string[] busStopOrder = settings.getBusStopName();
+            int uibIndex = 0;
 
+            foreach (string busStop in busStopOrder)
+            {
+                foreach (UserInfo i in ui)
+                {
+                    if (i.BusStop == busStop)
+                    {
+                        uiBusStopOrder[uibIndex] = i;
 
+                        uibIndex++;
+                    }
+                }
+            }
 
             ////
             //★運行日の日付にするdayOfWeek
@@ -220,7 +229,7 @@ namespace BusPassengerListCreationTool
                 startRow++;
 
                 // 各セルへ値を代入
-                foreach (UserInfo uis in ui)
+                foreach (UserInfo uis in uiBusStopOrder)
                 {
                     ws.Cell(startRow, startColumn).Value = uis.Name;
                     ws.Cell(startRow, startColumn + 1).Value = uis.Address;

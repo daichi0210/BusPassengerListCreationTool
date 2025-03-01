@@ -14,6 +14,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 // Excel起動用
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Globalization;
 
 namespace BusPassengerListCreationTool
 {
@@ -209,9 +210,13 @@ namespace BusPassengerListCreationTool
                 var row = ws.Row(1);
                 var column = ws.Column(1);
 
+                // 年を和暦で表示するための準備
+                CultureInfo japanese = new CultureInfo("ja-JP");
+                japanese.DateTimeFormat.Calendar = new JapaneseCalendar();
+
                 // 運行日をセルへ代入
                 ws.Cell(1, 1).Value = "運行日";
-                ws.Cell(1, 2).Value = dateTimePickerOperationDays.Value.ToString("yyyy年MM月dd日");
+                ws.Cell(1, 2).Value = dateTimePickerOperationDays.Value.ToString("ggy年M月d日", japanese);
 
 
                 // 開始行を指定

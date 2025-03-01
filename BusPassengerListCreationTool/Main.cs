@@ -209,15 +209,18 @@ namespace BusPassengerListCreationTool
                 var row = ws.Row(1);
                 var column = ws.Column(1);
 
+                // 運行日をセルへ代入
+                ws.Cell(1, 1).Value = "運行日";
+                ws.Cell(1, 2).Value = dateTimePickerOperationDays.Value.ToString("yyyy年MM月dd日");
 
 
                 // 開始行を指定
-                int startRow = 1;
+                int startRow = 3;
                 // 開始列を指定
                 int startColumn = 1;
 
                 // 開始セルを指定
-                var cell = ws.Cell(startColumn, startRow);
+                //var cell = ws.Cell(startColumn, startRow);
 
                 // ヘッダー
                 ws.Cell(startRow, startColumn).Value = "名前";

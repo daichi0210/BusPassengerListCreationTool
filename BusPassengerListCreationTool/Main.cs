@@ -61,15 +61,6 @@ namespace BusPassengerListCreationTool
             checkedListBoxUserSelection.Items.Clear();
 
             UserListDatabase users = new UserListDatabase();
-            /*
-
-                        string[] names = users.loadName();
-
-                        foreach (string name in names)
-                        {
-                            checkedListBoxUserSelection.Items.Add(name);
-                        }
-            */
 
             // IdとNameを辞書で管理
             var userInfo = new Dictionary<int, string>();
@@ -120,12 +111,10 @@ namespace BusPassengerListCreationTool
                 }
             }
 
-
             // IdとNameを辞書で管理
             UserListDatabase users = new UserListDatabase();
             var userInfo = new Dictionary<int, string>();
             userInfo = users.getUserInfo();
-
 
             //★同姓同名が存在しない前提
             // 乗車する人の情報を取得する
@@ -180,15 +169,14 @@ namespace BusPassengerListCreationTool
                 }
             }
 
-            ////
             //★運行日の日付にするdayOfWeek
             string fileName = "あごころ乗車名簿_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
 
             // テンプレートファイルをコピー
-            //★上書き確認
+            //★★上書き確認
             //★フォルダがない場合
             //★テンプレートがない場合
-            //File.Copy("template\\_busPassengerList.xlsx", "bus passenger list\\" + fileName);
+            File.Copy("template\\_busPassengerList.xlsx", "busPassengerList\\" + fileName);
 
             // 現在のディレクトリを取得
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -197,14 +185,15 @@ namespace BusPassengerListCreationTool
             // Excelファイル
             //string excelFile = Path.Combine(currentDirectory, "bus passenger list\\" + fileName);
             //string excelFile = Path.Combine(currentDirectory, "template\\_busPassengerList.xlsx");
-            string excelFile = Path.Combine(currentDirectory, "template\\" + fileName);
+            string excelFile = Path.Combine(currentDirectory, "busPassengerList\\" + fileName);
+            //string excelFile = Path.Combine(currentDirectory, "template\\" + fileName);
 
             // Excelの実行ファイルのパスを指定
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
             
             // Excelファイルに出力
-            //using (var wb = new XLWorkbook(excelFile))
-            using (var wb = new XLWorkbook())
+            using (var wb = new XLWorkbook(excelFile))
+            //using (var wb = new XLWorkbook())
             {
                 var ws = wb.AddWorksheet("乗車名簿");
                 var row = ws.Row(1);
@@ -248,7 +237,10 @@ namespace BusPassengerListCreationTool
                     startRow++;
                 }
 
-                wb.SaveAs("template\\" + fileName);
+                // 保存
+                //★上書き保存
+                //wb.SaveAs("template\\" + fileName);
+                wb.SaveAs(excelFile);
             }
 
             // Excelを開く

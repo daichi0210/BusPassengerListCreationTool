@@ -175,6 +175,14 @@ namespace BusPassengerListCreationTool
             // 現在のディレクトリを取得
             string currentDirectory = Directory.GetCurrentDirectory();
 
+            // テンプレートファイルが存在しない場合、エラーを表示する
+            string templateFile = Path.Combine(currentDirectory, "template\\" + "_busPassengerList.xlsx");
+            if (!(File.Exists(templateFile)))
+            {
+                MessageBox.Show("テンプレートファイルが存在しません。");
+                return;
+            }
+
             // 出力用フォルダが存在しない場合、作成する
             string outputFolder = Path.Combine(currentDirectory, "busPassengerList");
             if (!(Directory.Exists(outputFolder)))
@@ -182,8 +190,6 @@ namespace BusPassengerListCreationTool
                 DirectoryInfo di = new DirectoryInfo(outputFolder);
                 di.Create();
             }
-
-            //★テンプレートファイルが存在しない場合
 
             // 現在のディレクトリからの相対パスを作成
             string excelFile = Path.Combine(currentDirectory, "busPassengerList\\" + fileName);
@@ -204,7 +210,6 @@ namespace BusPassengerListCreationTool
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
             
             // Excelファイルに出力
-            //★テンプレートファイルがなく、コピーできず、ファイルが存在しない場合
             using (var wb = new XLWorkbook(excelFile))
             {
                 // ワークシート"テンプレート"を指定

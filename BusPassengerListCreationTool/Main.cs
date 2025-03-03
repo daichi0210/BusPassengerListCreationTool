@@ -182,26 +182,20 @@ namespace BusPassengerListCreationTool
             string currentDirectory = Directory.GetCurrentDirectory();
 
             // 現在のディレクトリからの相対パスを作成
-            // Excelファイル
-            //string excelFile = Path.Combine(currentDirectory, "bus passenger list\\" + fileName);
-            //string excelFile = Path.Combine(currentDirectory, "template\\_busPassengerList.xlsx");
             string excelFile = Path.Combine(currentDirectory, "busPassengerList\\" + fileName);
-            //string excelFile = Path.Combine(currentDirectory, "template\\" + fileName);
 
             // Excelの実行ファイルのパスを指定
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
             
             // Excelファイルに出力
             using (var wb = new XLWorkbook(excelFile))
-            //using (var wb = new XLWorkbook())
             {
                 // ワークシート"テンプレート"を指定
-                //var ws = wb.AddWorksheet("乗車名簿");
                 var ws = wb.Worksheet("乗車名簿");
 
                 // ワークシート名を変更
-                //★記述する
-                
+                ws.Name = dateTimePickerOperationDays.Value.ToString("MMdd"); ;
+
                 // 年を和暦で表示するための準備
                 CultureInfo japanese = new CultureInfo("ja-JP");
                 japanese.DateTimeFormat.Calendar = new JapaneseCalendar();
@@ -214,27 +208,10 @@ namespace BusPassengerListCreationTool
                 //ws.Cell(1, 1).Value = "運行日";
                 operationDaysCell.Value = dateTimePickerOperationDays.Value.ToString("gg y年 M月 d日", japanese);
 
-                // 利用者情報を書き込み
-                //var row = ws.Row(1);
-                //var column = ws.Column(1);
-
                 // 開始行を指定
                 int startRow = 5;
                 // 開始列を指定
                 int startColumn = 2;
-
-                // 開始セルを指定
-                //var cell = ws.Cell(startColumn, startRow);
-
-                // ヘッダー
-                /*
-                ws.Cell(startRow, startColumn).Value = "名前";
-                ws.Cell(startRow, startColumn + 1).Value = "住所";
-                ws.Cell(startRow, startColumn + 2).Value = "電話番号";
-                ws.Cell(startRow, startColumn + 3).Value = "バス停";
-                ws.Cell(startRow, startColumn + 4).Value = "備考";
-                startRow++;
-                */
 
                 // 各セルへ値を代入
                 foreach (UserInfo uis in uiBusStopOrder)
@@ -247,6 +224,7 @@ namespace BusPassengerListCreationTool
 
                     startRow++;
                 }
+
                 // 空席の分のセルを書き換え
                 for (int i = 0; i < settings.getMaximumPeople() - uiBusStopOrder.Length; i++)
                 {
@@ -261,7 +239,6 @@ namespace BusPassengerListCreationTool
 
                 // 保存
                 //★上書き保存
-                //wb.SaveAs("template\\" + fileName);
                 wb.SaveAs(excelFile);
             }
 

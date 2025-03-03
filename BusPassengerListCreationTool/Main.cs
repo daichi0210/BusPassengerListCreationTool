@@ -172,17 +172,26 @@ namespace BusPassengerListCreationTool
             //★運行日の日付にするdayOfWeek
             string fileName = "あごころ乗車名簿_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
 
+            // 現在のディレクトリを取得
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            // 出力用フォルダを作成
+            string outputFolder = Path.Combine(currentDirectory, "busPassengerList");
+            if (!(Directory.Exists(outputFolder)))
+            {
+                DirectoryInfo di = new DirectoryInfo(outputFolder);
+                di.Create();
+            }
+
+            // 現在のディレクトリからの相対パスを作成
+            string excelFile = Path.Combine(currentDirectory, "busPassengerList\\" + fileName);
+
             // テンプレートファイルをコピー
             //★★上書き確認
             //★フォルダがない場合
             //★テンプレートがない場合
             File.Copy("template\\_busPassengerList.xlsx", "busPassengerList\\" + fileName);
 
-            // 現在のディレクトリを取得
-            string currentDirectory = Directory.GetCurrentDirectory();
-
-            // 現在のディレクトリからの相対パスを作成
-            string excelFile = Path.Combine(currentDirectory, "busPassengerList\\" + fileName);
 
             // Excelの実行ファイルのパスを指定
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
@@ -201,11 +210,9 @@ namespace BusPassengerListCreationTool
                 japanese.DateTimeFormat.Calendar = new JapaneseCalendar();
 
                 // 運行日のセル
-                //★F2などアルファベットと行番号に直す
                 var operationDaysCell = ws.Cell(2, 6);
 
-                // ワークシート名を運行日に変更
-                //ws.Cell(1, 1).Value = "運行日";
+                // 運行日を挿入
                 operationDaysCell.Value = dateTimePickerOperationDays.Value.ToString("gg y年 M月 d日", japanese);
 
                 // 開始行を指定

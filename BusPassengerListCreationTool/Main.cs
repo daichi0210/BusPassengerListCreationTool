@@ -175,7 +175,7 @@ namespace BusPassengerListCreationTool
             // 現在のディレクトリを取得
             string currentDirectory = Directory.GetCurrentDirectory();
 
-            // 出力用フォルダを作成
+            // 出力用フォルダが存在しない場合、作成する
             string outputFolder = Path.Combine(currentDirectory, "busPassengerList");
             if (!(Directory.Exists(outputFolder)))
             {
@@ -183,20 +183,28 @@ namespace BusPassengerListCreationTool
                 di.Create();
             }
 
+            //★テンプレートファイルが存在しない場合
+
             // 現在のディレクトリからの相対パスを作成
             string excelFile = Path.Combine(currentDirectory, "busPassengerList\\" + fileName);
 
-            // テンプレートファイルをコピー
-            //★★上書き確認
-            //★フォルダがない場合
-            //★テンプレートがない場合
-            File.Copy("template\\_busPassengerList.xlsx", "busPassengerList\\" + fileName);
-
+            // 出力ファイルと同名のExcelファイルが開かれている場合、エラーが発生する
+            try
+            {
+                // テンプレートファイルをコピー（同名のファイルが存在する場合は上書きする）
+                File.Copy("template\\_busPassengerList.xlsx", "busPassengerList\\" + fileName, true);
+            }
+            catch (System.IO.IOException ex)
+            {
+                MessageBox.Show("Excelファイルを閉じてください。");
+                return;
+            }
 
             // Excelの実行ファイルのパスを指定
             string excelPath = @"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE";
             
             // Excelファイルに出力
+            //★テンプレートファイルがなく、コピーできず、ファイルが存在しない場合
             using (var wb = new XLWorkbook(excelFile))
             {
                 // ワークシート"テンプレート"を指定

@@ -169,8 +169,8 @@ namespace BusPassengerListCreationTool
                 }
             }
 
-            //★運行日の日付にするdayOfWeek
-            string fileName = "あごころ乗車名簿_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
+            // 出力するExcelファイル名を指定
+            string fileName = "あごころ乗車名簿_" + dateTimePickerOperationDays.Value.ToString("yyyy-MM-dd") + ".xlsx";
 
             // 現在のディレクトリを取得
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -216,7 +216,7 @@ namespace BusPassengerListCreationTool
                 var ws = wb.Worksheet("乗車名簿");
 
                 // ワークシート名を変更
-                ws.Name = dateTimePickerOperationDays.Value.ToString("MMdd"); ;
+                ws.Name = dateTimePickerOperationDays.Value.ToString("MMdd");
 
                 // 年を和暦で表示するための準備
                 CultureInfo japanese = new CultureInfo("ja-JP");
@@ -257,8 +257,7 @@ namespace BusPassengerListCreationTool
                     startRow++;
                 }
 
-                // 保存
-                //★上書き保存
+                // 上書き保存
                 wb.SaveAs(excelFile);
             }
 

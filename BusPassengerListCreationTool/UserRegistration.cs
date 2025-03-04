@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,7 +28,27 @@ namespace BusPassengerListCreationTool
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
-            //★入力チェック
+            // 未入力・未選択チェック
+            if (textBoxName.Text == String.Empty)
+            {
+                MessageBox.Show("名前を入力してください。");
+                return;
+            }
+            if (textBoxAddress.Text == String.Empty)
+            {
+                MessageBox.Show("住所を入力してください。");
+                return;
+            }
+            if (textBoxTEL.Text == String.Empty)
+            {
+                MessageBox.Show("電話番号を入力してください。");
+                return;
+            }
+            if (comboBoxBusStop.Text == String.Empty)
+            {
+                MessageBox.Show("バス停を選択してください。");
+                return;
+            }
 
             //★データベースに登録
             string name = textBoxName.Text;

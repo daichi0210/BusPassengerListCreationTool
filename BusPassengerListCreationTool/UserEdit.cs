@@ -41,6 +41,28 @@ namespace BusPassengerListCreationTool
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            // 未入力・未選択チェック
+            if (textBoxName.Text == String.Empty)
+            {
+                MessageBox.Show("名前を入力してください。");
+                return;
+            }
+            if (textBoxAddress.Text == String.Empty)
+            {
+                MessageBox.Show("住所を入力してください。");
+                return;
+            }
+            if (textBoxTEL.Text == String.Empty)
+            {
+                MessageBox.Show("電話番号を入力してください。");
+                return;
+            }
+            if (comboBoxBusStop.Text == String.Empty)
+            {
+                MessageBox.Show("バス停を選択してください。");
+                return;
+            }
+
             // 上書き保存の確認メッセージ
             DialogResult result = MessageBox.Show("使用者情報を上書き保存しますか？", "", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)

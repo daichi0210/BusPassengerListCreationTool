@@ -147,7 +147,6 @@ namespace BusPassengerListCreationTool
 
                         break;
                     }
-                    //MessageBox.Show(data.Value);
                 }
             }
 

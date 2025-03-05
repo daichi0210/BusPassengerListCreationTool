@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -62,6 +63,13 @@ namespace BusPassengerListCreationTool
                 MessageBox.Show("バス停を選択してください。");
                 return;
             }
+
+            // 電話番号を半角数字に置換
+            textBoxTEL.Text = Regex.Replace(textBoxTEL.Text, "[０-９]", p => ((char)(p.Value[0] - '０' + '0')).ToString());
+            // 電話番号の全角ハイフンを半角ハイフンに置換
+            textBoxTEL.Text = Regex.Replace(textBoxTEL.Text, "－", "-");
+
+
 
             // 上書き保存の確認メッセージ
             DialogResult result = MessageBox.Show("使用者情報を上書き保存しますか？", "", MessageBoxButtons.YesNo);

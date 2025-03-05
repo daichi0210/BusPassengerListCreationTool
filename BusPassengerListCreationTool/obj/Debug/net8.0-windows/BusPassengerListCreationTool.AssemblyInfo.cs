@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BusPassengerListCreationTool")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d41ff96149a1f340cc7245124720d85b93b28e51")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3440050ccdee0adf6bf580518409b37af5b8d1ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("BusPassengerListCreationTool")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BusPassengerListCreationTool")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

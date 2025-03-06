@@ -64,10 +64,14 @@ namespace BusPassengerListCreationTool
                 return;
             }
 
-            // 電話番号を半角数字に置換
-            textBoxTEL.Text = Regex.Replace(textBoxTEL.Text, "[０-９]", p => ((char)(p.Value[0] - '０' + '0')).ToString());
-            // 電話番号の全角ハイフンを半角ハイフンに置換
-            textBoxTEL.Text = Regex.Replace(textBoxTEL.Text, "－", "-");
+            //// テキストを置換
+            ReplaceText rt = new ReplaceText();
+            // 全角数字を半角数字に置換
+            textBoxTEL.Text = rt.fullToHalfNumbers(textBoxTEL.Text);
+            textBoxAddress.Text = rt.fullToHalfNumbers(textBoxAddress.Text);
+            // 全角ハイフンを半角ハイフンに置換
+            textBoxTEL.Text = rt.fullToHalfHyphen(textBoxTEL.Text);
+            textBoxAddress.Text = rt.fullToHalfHyphen(textBoxAddress.Text);
 
 
 

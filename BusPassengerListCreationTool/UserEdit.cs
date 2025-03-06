@@ -42,25 +42,22 @@ namespace BusPassengerListCreationTool
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            // 未入力・未選択チェック
-            if (textBoxName.Text == String.Empty)
+            //// 未入力・未選択チェック
+            CheckMissingEntries cme = new CheckMissingEntries();
+            if (cme.NoInput(textBoxName.Text, "名前"))
             {
-                MessageBox.Show("名前を入力してください。");
                 return;
             }
-            if (textBoxAddress.Text == String.Empty)
+            if (cme.NoInput(textBoxAddress.Text, "住所"))
             {
-                MessageBox.Show("住所を入力してください。");
                 return;
             }
-            if (textBoxTEL.Text == String.Empty)
+            if (cme.NoInput(textBoxTEL.Text, "電話番号"))
             {
-                MessageBox.Show("電話番号を入力してください。");
                 return;
             }
-            if (comboBoxBusStop.Text == String.Empty)
+            if (cme.NoChoice(comboBoxBusStop.Text, "バス停"))
             {
-                MessageBox.Show("バス停を選択してください。");
                 return;
             }
 

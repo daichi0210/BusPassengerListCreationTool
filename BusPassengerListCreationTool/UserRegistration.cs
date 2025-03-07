@@ -15,6 +15,18 @@ namespace BusPassengerListCreationTool
 {
     public partial class UserRegistration : Form
     {
+        private string _mode; // フォームのモード（新規／編集）を指定する
+        
+        public string mode
+        {
+            set
+            {
+                _mode = value;
+            }
+        }
+
+
+
         public UserRegistration()
         {
             InitializeComponent();
@@ -25,6 +37,24 @@ namespace BusPassengerListCreationTool
             // バス停の候補を代入
             Settings settings = new Settings();
             comboBoxBusStop.Items.AddRange(settings.getBusStopName());
+
+            MessageBox.Show("Load");
+
+            // 新規登録の場合
+            if (_mode == "new")
+            {
+                userRegistration();
+            }
+            // 編集の場合
+            else if (_mode == "edit")
+            {
+                userEdit();
+            }
+            else
+            {
+                MessageBox.Show("呼び出しエラー");
+            }
+
         }
 
         private void buttonRegistration_Click(object sender, EventArgs e)
@@ -75,6 +105,16 @@ namespace BusPassengerListCreationTool
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void userRegistration()
+        {
+            MessageBox.Show("新規モード");
+        }
+
+        public void userEdit()
+        {
+            MessageBox.Show("編集モード");
         }
     }
 }

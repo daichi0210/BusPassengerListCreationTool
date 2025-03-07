@@ -28,6 +28,7 @@ namespace BusPassengerListCreationTool
         private void buttonUserRegistration_Click(object sender, EventArgs e)
         {
             UserRegistration userRegistration = new UserRegistration();
+            userRegistration.mode = "new";
             userRegistration.ShowDialog();
 
             // 使用者一覧情報を読み込む

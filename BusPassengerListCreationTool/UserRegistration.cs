@@ -15,17 +15,16 @@ namespace BusPassengerListCreationTool
 {
     public partial class UserRegistration : Form
     {
-        private string _mode; // フォームのモード（新規／編集）を指定する
-        
-        public string mode
+        // 編集対象
+        private int _editTargetId = -1;
+
+        public int editTargetId
         {
             set
             {
-                _mode = value;
+                _editTargetId = value;
             }
         }
-
-
 
         public UserRegistration()
         {
@@ -40,21 +39,18 @@ namespace BusPassengerListCreationTool
 
             MessageBox.Show("Load");
 
-            // 新規登録の場合
-            if (_mode == "new")
-            {
-                userRegistration();
-            }
-            // 編集の場合
-            else if (_mode == "edit")
+            // _editTargetId が -1 以外の場合、編集対象のデータを読み込む
+            if (_editTargetId != -1)
             {
                 userEdit();
             }
+            /*
+            // 新規登録の場合
             else
             {
-                MessageBox.Show("呼び出しエラー");
+                userRegistration();
             }
-
+            */
         }
 
         private void buttonRegistration_Click(object sender, EventArgs e)
@@ -115,6 +111,21 @@ namespace BusPassengerListCreationTool
         public void userEdit()
         {
             MessageBox.Show("編集モード");
+
+            // 使用者情報を取得
+            UserListDatabase users = new UserListDatabase();
+            //MessageBox.Show(editTargetId.ToString());
+            DataTable userData = users.getUserData(_editTargetId);
+
+            // 使用者情報を代入
+            textBoxName.Text = userData.Rows[0]["Name"].ToString();
+            textBoxAddress.Text = userData.Rows[0]["Address"].ToString();
+            textBoxTEL.Text = userData.Rows[0]["TEL"].ToString();
+            comboBoxBusStop.Text = userData.Rows[0]["BusStop"].ToString();
+            textBoxRemarks.Text = userData.Rows[0]["Remarks"].ToString();
+
+            // 登録ボタンの Text を変更
+            buttonRegistration.Text = "上書き保存";
         }
     }
 }

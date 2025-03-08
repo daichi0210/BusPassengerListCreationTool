@@ -28,7 +28,6 @@ namespace BusPassengerListCreationTool
         private void buttonUserRegistration_Click(object sender, EventArgs e)
         {
             UserRegistration userRegistration = new UserRegistration();
-            userRegistration.mode = "new";
             userRegistration.ShowDialog();
 
             // 使用者一覧情報を読み込む
@@ -43,10 +42,16 @@ namespace BusPassengerListCreationTool
             var idValue = selectedRow.Cells["Id"].Value;
             int targetId = Int32.Parse(idValue.ToString());
 
+            /*
             // 編集ウィンドウを表示
             UserEdit userEdit = new UserEdit();
             userEdit.editTargetId = targetId;
             userEdit.ShowDialog();
+            */
+
+            UserRegistration userRegistration = new UserRegistration();
+            userRegistration.editTargetId = targetId;
+            userRegistration.ShowDialog();
 
             // 使用者一覧情報を読み込む
             loadData();

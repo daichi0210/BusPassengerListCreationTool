@@ -84,16 +84,35 @@ namespace BusPassengerListCreationTool
             textBoxAddress.Text = rt.fullToHalfHyphen(textBoxAddress.Text);
 
 
+            // 編集モードの場合
+            if (_editTargetId != -1)
+            {
+                // 上書き保存の確認メッセージ
+                DialogResult result = MessageBox.Show("使用者情報を上書き保存しますか？", "", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    //★データを上書き保存
+                    UserListDatabase users = new UserListDatabase();
+                    users.editDB(_editTargetId, textBoxName.Text, textBoxAddress.Text, textBoxTEL.Text, comboBoxBusStop.Text, textBoxRemarks.Text);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                //★データベースに登録
+                string name = textBoxName.Text;
+                string address = textBoxAddress.Text;
+                string TEL = textBoxTEL.Text;
+                string busStop = comboBoxBusStop.Text;
+                string remarks = textBoxRemarks.Text;
 
-            //★データベースに登録
-            string name = textBoxName.Text;
-            string address = textBoxAddress.Text;
-            string TEL = textBoxTEL.Text;
-            string busStop = comboBoxBusStop.Text;
-            string remarks = textBoxRemarks.Text;
+                UserListDatabase users = new UserListDatabase();
+                users.addDB(name, address, TEL, busStop, remarks);
 
-            UserListDatabase users = new UserListDatabase();
-            users.addDB(name, address, TEL, busStop, remarks);
+            }
 
             this.Close();
         }
@@ -103,10 +122,12 @@ namespace BusPassengerListCreationTool
             this.Close();
         }
 
+        /*
         public void userRegistration()
         {
             MessageBox.Show("新規モード");
         }
+        */
 
         public void userEdit()
         {

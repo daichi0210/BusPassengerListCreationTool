@@ -42,6 +42,7 @@ namespace BusPassengerListCreationTool
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            /*
             //// 未入力・未選択チェック
             CheckMissingEntries cme = new CheckMissingEntries();
             if (cme.NoInput(textBoxName.Text, "名前"))
@@ -69,7 +70,7 @@ namespace BusPassengerListCreationTool
             // 全角ハイフンを半角ハイフンに置換
             textBoxTEL.Text = rt.fullToHalfHyphen(textBoxTEL.Text);
             textBoxAddress.Text = rt.fullToHalfHyphen(textBoxAddress.Text);
-
+            */
 
 
             // 上書き保存の確認メッセージ

@@ -13,16 +13,7 @@ namespace BusPassengerListCreationTool
         private string _tel;      // 電話番号
         private string _busStop;  // 乗車バス停
         private string _remarks;  // 備考
-/*
-        public UserInfo(string name, string address, string tel, string busStop, string remarks)
-        {
-            _name = name;
-            _address = address;
-            _tel = tel;
-            _busStop = busStop;
-            _remarks = remarks;
-        }
-*/
+
         public string Name
         {
             get { return _name; }

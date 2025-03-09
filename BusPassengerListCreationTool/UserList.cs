@@ -42,13 +42,6 @@ namespace BusPassengerListCreationTool
             var idValue = selectedRow.Cells["Id"].Value;
             int targetId = Int32.Parse(idValue.ToString());
 
-            /*
-            // 編集ウィンドウを表示
-            UserEdit userEdit = new UserEdit();
-            userEdit.editTargetId = targetId;
-            userEdit.ShowDialog();
-            */
-
             UserRegistration userRegistration = new UserRegistration();
             userRegistration.editTargetId = targetId;
             userRegistration.ShowDialog();

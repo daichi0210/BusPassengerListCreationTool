@@ -57,7 +57,19 @@ namespace BusPassengerListCreationTool
         {
             //// 未入力・未選択チェック
             CheckMissingEntries cme = new CheckMissingEntries();
-            if (cme.NoInput(textBoxName.Text, "名前"))
+            if (cme.NoInput(textBoxLastName.Text, "姓"))
+            {
+                return;
+            }
+            if (cme.NoInput(textBoxFirstName.Text, "名"))
+            {
+                return;
+            }
+            if (cme.NoInput(textBoxLastNameKana.Text, "セイ"))
+            {
+                return;
+            }
+            if (cme.NoInput(textBoxFirstNameKana.Text, "メイ"))
             {
                 return;
             }
@@ -65,7 +77,12 @@ namespace BusPassengerListCreationTool
             {
                 return;
             }
-            if (cme.NoInput(textBoxTEL.Text, "電話番号"))
+            //★固定電話または携帯電話番号は必須
+            if (cme.NoInput(textBoxTel.Text, "固定電話番号"))
+            {
+                return;
+            }
+            if (cme.NoInput(textBoxMobileNumber.Text, "携帯電話番号"))
             {
                 return;
             }
@@ -77,10 +94,10 @@ namespace BusPassengerListCreationTool
             //// テキストを置換
             ReplaceText rt = new ReplaceText();
             // 全角数字を半角数字に置換
-            textBoxTEL.Text = rt.fullToHalfNumbers(textBoxTEL.Text);
+            textBoxTel.Text = rt.fullToHalfNumbers(textBoxTel.Text);
             textBoxAddress.Text = rt.fullToHalfNumbers(textBoxAddress.Text);
             // 全角ハイフンを半角ハイフンに置換
-            textBoxTEL.Text = rt.fullToHalfHyphen(textBoxTEL.Text);
+            textBoxTel.Text = rt.fullToHalfHyphen(textBoxTel.Text);
             textBoxAddress.Text = rt.fullToHalfHyphen(textBoxAddress.Text);
 
 
@@ -93,7 +110,7 @@ namespace BusPassengerListCreationTool
                 {
                     //★データを上書き保存
                     UserListDatabase users = new UserListDatabase();
-                    users.editDB(_editTargetId, textBoxName.Text, textBoxAddress.Text, textBoxTEL.Text, comboBoxBusStop.Text, textBoxRemarks.Text);
+                    users.editDB(_editTargetId, textBoxLastName.Text, textBoxAddress.Text, textBoxTel.Text, comboBoxBusStop.Text, textBoxRemarks.Text);
                 }
                 else
                 {
@@ -103,9 +120,9 @@ namespace BusPassengerListCreationTool
             else
             {
                 //★データベースに登録
-                string name = textBoxName.Text;
+                string name = textBoxLastName.Text;
                 string address = textBoxAddress.Text;
-                string TEL = textBoxTEL.Text;
+                string TEL = textBoxTel.Text;
                 string busStop = comboBoxBusStop.Text;
                 string remarks = textBoxRemarks.Text;
 
@@ -139,9 +156,9 @@ namespace BusPassengerListCreationTool
             DataTable userData = users.getUserData(_editTargetId);
 
             // 使用者情報を代入
-            textBoxName.Text = userData.Rows[0]["Name"].ToString();
+            textBoxLastName.Text = userData.Rows[0]["Name"].ToString();
             textBoxAddress.Text = userData.Rows[0]["Address"].ToString();
-            textBoxTEL.Text = userData.Rows[0]["TEL"].ToString();
+            textBoxTel.Text = userData.Rows[0]["TEL"].ToString();
             comboBoxBusStop.Text = userData.Rows[0]["BusStop"].ToString();
             textBoxRemarks.Text = userData.Rows[0]["Remarks"].ToString();
 

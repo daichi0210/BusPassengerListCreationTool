@@ -121,14 +121,26 @@ namespace BusPassengerListCreationTool
                 {
                     case "Id":
                         break;
-                    case "Name":
-                        cellValue = "名前";
+                    case "LastName":
+                        cellValue = "姓";
+                        break;
+                    case "FirstName":
+                        cellValue = "名";
+                        break;
+                    case "LastNameKana":
+                        cellValue = "セイ";
+                        break;
+                    case "FirstNameKana":
+                        cellValue = "メイ";
                         break;
                     case "Address":
                         cellValue = "住所";
                         break;
-                    case "TEL":
-                        cellValue = "電話番号";
+                    case "Tel":
+                        cellValue = "電話番号（固定電話）";
+                        break;
+                    case "MobileNumber":
+                        cellValue = "電話番号（携帯電話）";
                         break;
                     case "BusStop":
                         cellValue = "バス停";

@@ -12,55 +12,95 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.ComponentModel;
 using static System.Data.Entity.Infrastructure.Design.Executor;
+using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace BusPassengerListCreationTool
 {
     internal class UserListDatabase
     {
         // データベースファイルへの接続文字列
-        string connectionString = "Data Source=users.db;Version=3;";
+        private string _connection = "Data Source=users.db;Version=3;";
+        
+        // テーブルのカラム
+        private string _column =
+            "(" +
+            "Id INTEGER PRIMARY KEY, " +
+            "LastName TEXT, " +         // 姓
+            "FirstName TEXT, " +        // 名
+            "LastNameKana TEXT, " +     // セイ
+            "FirstNameKana TEXT, " +    // メイ
+            "Address TEXT, " +          // 住所
+            "Tel TEXT, " +              // 固定電話番号
+            "MobileNumber TEXT, " +     // 携帯電話番号
+            "BusStop TEXT, " +          // バス停
+            "Remarks TEXT" +            // 備考
+            ")";
 
-        //public DataTable loadDB()
+        // データベースの情報を読み込む
         public DataTable loadDB()
         {
+            // テーブルがなければ作成するSQL
+            //★★★どこに保存されている…？
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + _column);
+
+            //★★★仮のデータを挿入
+            //ExecuteNonQuery("INSERT INTO user_list (LastName, FirstName, Tel) VALUES ('last-name', 'first-name', '00-0000-0000')");
+
+            //// テーブルのデータを取得
+            DataTable dataTable = new DataTable();
+            // SQL文
+            string query = "SELECT * FROM user_list";
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
 
-                // テーブルがなければ作成するSQL
-                string createTableQuery = "CREATE TABLE IF NOT EXISTS Users (Id INTEGER PRIMARY KEY, Name TEXT, Address TEXT, TEL TEXT, BusStop TEXT, Remarks TEXT)";
-                using (var cmd = new SQLiteCommand(createTableQuery, connection))
-                {
-                    // SQL文を実行してテーブルを作成
-                    cmd.ExecuteNonQuery();
-                }
-
-                // データを取得するSQL
-                string selectQuery = "SELECT * FROM Users";
-
-                // データテーブルにデータを挿入
-                DataTable dataTable = new DataTable();
-                using (var cmd = new SQLiteCommand(selectQuery, connection))
+                //// DataTableにデータを挿入
+                using (var cmd = new SQLiteCommand(query, connection))
                 {
                     using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
                     {
-                        // データをDataTableに埋め込む
+                        // DataTableにデータを埋め込む
                         adapter.Fill(dataTable);  
                     }
                 }
 
                 // 接続を閉じる
                 connection.Close();
+            }
 
-                return dataTable;
+            return dataTable;
+        }
+
+        // 結果を返さないクエリを実行する
+        public void ExecuteNonQuery(string query)
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(_connection))
+            {
+                // データベース接続を開く
+                connection.Open();
+
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    // SQL文を実行
+                    cmd.ExecuteNonQuery();
+                }
+
+                // データベース接続を閉じる
+                connection.Close();
             }
         }
+
+
+
+
         public void addDB(string name, string address, string TEL, string busStop, string remarks)
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 connection.Open(); // データベース接続を開く
 
@@ -82,10 +122,11 @@ namespace BusPassengerListCreationTool
                 connection.Close();
             }
         }
+        
         public void editDB(int targetId, string name, string address, string TEL, string busStop, string remarks)
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
@@ -119,7 +160,7 @@ namespace BusPassengerListCreationTool
         public void deleteDB(int targetId)
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
@@ -147,7 +188,7 @@ namespace BusPassengerListCreationTool
         public string[] getDB()
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
@@ -196,7 +237,7 @@ namespace BusPassengerListCreationTool
         public DataTable getUserData(int targetId)
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
@@ -228,11 +269,10 @@ namespace BusPassengerListCreationTool
             }
         }
 
-
         public string[] loadName()
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
@@ -275,7 +315,7 @@ namespace BusPassengerListCreationTool
         public Dictionary<int, string> getUserInfo()
         {
             // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();

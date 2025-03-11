@@ -27,8 +27,8 @@ namespace BusPassengerListCreationTool
 
         private void buttonUserRegistration_Click(object sender, EventArgs e)
         {
-            UserRegistration userRegistration = new UserRegistration();
-            userRegistration.ShowDialog();
+            UserRegistration ur = new UserRegistration();
+            ur.ShowDialog();
 
             // 使用者一覧情報を読み込む
             loadData();
@@ -42,13 +42,20 @@ namespace BusPassengerListCreationTool
             var idValue = selectedRow.Cells["Id"].Value;
             int targetId = Int32.Parse(idValue.ToString());
 
-            UserRegistration userRegistration = new UserRegistration();
-            userRegistration.editTargetId = targetId;
-            userRegistration.ShowDialog();
+            UserRegistration ur = new UserRegistration();
+            ur.editTargetId = targetId;
+            ur.ShowDialog();
 
             // 使用者一覧情報を読み込む
             loadData();
         }
+
+
+
+
+
+
+
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -105,8 +112,8 @@ namespace BusPassengerListCreationTool
         private void loadData()
         {
             // データを取得
-            UserListDatabase users = new UserListDatabase();
-            DataTable dataTable = users.loadDB();
+            UserListDatabase uld = new UserListDatabase();
+            DataTable dataTable = uld.LoadTable();
 
             // DataGridViewにデータをバインドする
             dataGridViewUsers.DataSource = dataTable;
@@ -167,7 +174,7 @@ namespace BusPassengerListCreationTool
             // 備考欄を自動調整
             dataGridViewUsers.Columns["Remarks"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            //
+            //★要調整
             dataGridViewUsers.RowTemplate.Height = 40;
 
 /*
@@ -187,7 +194,6 @@ namespace BusPassengerListCreationTool
 
             // アクティブなセルの選択を解除する
             dataGridViewUsers.ClearSelection();
-
         }
     }
 }

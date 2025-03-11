@@ -34,27 +34,19 @@ namespace BusPassengerListCreationTool
         private void UserRegistration_Load(object sender, EventArgs e)
         {
             // バス停の候補を代入
-            Settings settings = new Settings();
-            comboBoxBusStop.Items.AddRange(settings.getBusStopName());
-
-            MessageBox.Show("Load");
+            Settings s = new Settings();
+            comboBoxBusStop.Items.AddRange(s.getBusStopName());
 
             // _editTargetId が -1 以外の場合、編集対象のデータを読み込む
             if (_editTargetId != -1)
             {
                 userEdit();
             }
-            /*
-            // 新規登録の場合
-            else
-            {
-                userRegistration();
-            }
-            */
         }
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
+            //★★★要修正★★★
             //// 未入力・未選択チェック
             CheckMissingEntries cme = new CheckMissingEntries();
             if (cme.NoInput(textBoxLastName.Text, "姓"))
@@ -94,13 +86,15 @@ namespace BusPassengerListCreationTool
             //// テキストを置換
             ReplaceText rt = new ReplaceText();
             // 全角数字を半角数字に置換
-            textBoxTel.Text = rt.fullToHalfNumbers(textBoxTel.Text);
             textBoxAddress.Text = rt.fullToHalfNumbers(textBoxAddress.Text);
+            textBoxTel.Text = rt.fullToHalfNumbers(textBoxTel.Text);
+            textBoxMobileNumber.Text = rt.fullToHalfNumbers(textBoxMobileNumber.Text);
             // 全角ハイフンを半角ハイフンに置換
-            textBoxTel.Text = rt.fullToHalfHyphen(textBoxTel.Text);
             textBoxAddress.Text = rt.fullToHalfHyphen(textBoxAddress.Text);
-
-
+            textBoxTel.Text = rt.fullToHalfHyphen(textBoxTel.Text);
+            textBoxMobileNumber.Text = rt.fullToHalfHyphen(textBoxMobileNumber.Text);
+            
+            //★★★要確認★★★
             // 編集モードの場合
             if (_editTargetId != -1)
             {
@@ -119,16 +113,30 @@ namespace BusPassengerListCreationTool
             }
             else
             {
+                // 使用者情報を代入
+                User u = new User();
+                u.LastName = textBoxLastName.Text;    // 姓
+                u.FirstName = textBoxFirstName.Text;    // 名
+                u.LastNameKana = textBoxLastNameKana.Text;    // 姓（カナ）
+                u.FirstNameKana = textBoxFirstNameKana.Text;    // 名（カナ）
+                u.Address = textBoxAddress.Text;    // 住所
+                u.Tel = textBoxTel.Text;    // 電話番号（固定電話）
+                u.MobileNumber = textBoxMobileNumber.Text;    // 電話番号（携帯電話）
+                u.BusStop = comboBoxBusStop.Text;    // 乗車バス停
+                u.Remarks = textBoxRemarks.Text;    // 備考
+                
+                /*
                 //★データベースに登録
                 string name = textBoxLastName.Text;
                 string address = textBoxAddress.Text;
                 string TEL = textBoxTel.Text;
                 string busStop = comboBoxBusStop.Text;
                 string remarks = textBoxRemarks.Text;
+                */
 
-                UserListDatabase users = new UserListDatabase();
-                users.addDB(name, address, TEL, busStop, remarks);
-
+                UserListDatabase uld = new UserListDatabase();
+                //uld.addDB(name, address, TEL, busStop, remarks);
+                uld.Insert(u);
             }
 
             this.Close();
@@ -139,21 +147,17 @@ namespace BusPassengerListCreationTool
             this.Close();
         }
 
-        /*
-        public void userRegistration()
-        {
-            MessageBox.Show("新規モード");
-        }
-        */
 
+
+
+
+
+        //★★★要修正★★★
         public void userEdit()
         {
-            MessageBox.Show("編集モード");
-
             // 使用者情報を取得
-            UserListDatabase users = new UserListDatabase();
-            //MessageBox.Show(editTargetId.ToString());
-            DataTable userData = users.getUserData(_editTargetId);
+            UserListDatabase uld = new UserListDatabase();
+            DataTable userData = uld.getUserData(_editTargetId);
 
             // 使用者情報を代入
             textBoxLastName.Text = userData.Rows[0]["Name"].ToString();

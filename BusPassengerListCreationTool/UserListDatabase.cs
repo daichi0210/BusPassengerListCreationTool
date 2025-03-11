@@ -14,6 +14,7 @@ using System.ComponentModel;
 using static System.Data.Entity.Infrastructure.Design.Executor;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 
 namespace BusPassengerListCreationTool
 {
@@ -38,7 +39,7 @@ namespace BusPassengerListCreationTool
             ")";
 
         // データベースの情報を読み込む
-        public DataTable loadDB()
+        public DataTable LoadTable()
         {
             // テーブルがなければ作成するSQL
             //★★★どこに保存されている…？
@@ -74,6 +75,80 @@ namespace BusPassengerListCreationTool
             return dataTable;
         }
 
+        // データベースに追加する
+        public void Insert(User u)
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(_connection))
+            {
+                connection.Open(); // データベース接続を開く
+
+                // データを挿入するSQL
+                string insertQuery = "INSERT INTO user_list (LastName, FirstName, LastNameKana, FirstNameKana, Address, Tel, MobileNumber, BusStop, Remarks) VALUES (@LastName, @FirstName, @LastNameKana, @FirstNameKana, @Address, @Tel, @MobileNumber, @BusStop, @Remarks)";
+                using (var cmd = new SQLiteCommand(insertQuery, connection))
+                {
+                    // データを挿入
+                    cmd.Parameters.AddWithValue("@LastName", u.LastName);
+                    cmd.Parameters.AddWithValue("@FirstName", u.FirstName);
+                    cmd.Parameters.AddWithValue("@LastNameKana", u.LastNameKana);
+                    cmd.Parameters.AddWithValue("@FirstNameKana", u.FirstNameKana);
+                    cmd.Parameters.AddWithValue("@Address", u.Address);
+                    cmd.Parameters.AddWithValue("@Tel", u.Tel);
+                    cmd.Parameters.AddWithValue("@MobileNumber", u.MobileNumber);
+                    cmd.Parameters.AddWithValue("@BusStop", u.BusStop);
+                    cmd.Parameters.AddWithValue("@Remarks", u.Remarks);
+
+                    // SQL実行
+                    cmd.ExecuteNonQuery();
+                }
+
+                // 接続を閉じる
+                connection.Close();
+            }
+        }
+
+
+
+        //★★★要修正★★★
+        public DataTable getUserData(int targetId)
+        {
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + _column);
+
+
+
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(_connection))
+            {
+                // データベース接続を開く
+                connection.Open();
+
+                // データを取得するSQL
+                string query = "SELECT * FROM Users WHERE ID = @id";
+
+                // データテーブルにデータを挿入
+                DataTable dataTable = new DataTable();
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@id", targetId);
+
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+
+                        // データをDataTableに埋め込む
+                        adapter.Fill(dataTable);
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+
+                return dataTable;
+            }
+        }
+
         // 結果を返さないクエリを実行する
         public void ExecuteNonQuery(string query)
         {
@@ -97,6 +172,7 @@ namespace BusPassengerListCreationTool
 
 
 
+        /*
         public void addDB(string name, string address, string TEL, string busStop, string remarks)
         {
             // SQLiteの接続を開く
@@ -122,7 +198,8 @@ namespace BusPassengerListCreationTool
                 connection.Close();
             }
         }
-        
+        */
+
         public void editDB(int targetId, string name, string address, string TEL, string busStop, string remarks)
         {
             // SQLiteの接続を開く
@@ -231,41 +308,6 @@ namespace BusPassengerListCreationTool
                 }
 
                 return userData;
-            }
-        }
-
-        public DataTable getUserData(int targetId)
-        {
-            // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(_connection))
-            {
-                // データベース接続を開く
-                connection.Open();
-
-                // データを取得するSQL
-                string selectQuery = "SELECT * FROM Users WHERE ID = @id";
-
-                // データテーブルにデータを挿入
-                DataTable dataTable = new DataTable();
-                using (var cmd = new SQLiteCommand(selectQuery, connection))
-                {
-                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
-                    {
-                        // データを挿入
-                        cmd.Parameters.AddWithValue("@id", targetId);
-
-                        // SQL実行
-                        cmd.ExecuteNonQuery();
-
-                        // データをDataTableに埋め込む
-                        adapter.Fill(dataTable);
-                    }
-                }
-
-                // 接続を閉じる
-                connection.Close();
-
-                return dataTable;
             }
         }
 

@@ -17,14 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{26B351C2-50C5-4D36-AF94-77AA16BF70BC}|BusPassengerListCreationTool\\BusPassengerListCreationTool.csproj|d:\\dev\\windows\\src\\repos\\buspassengerlistcreationtool\\buspassengerlistcreationtool\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26B351C2-50C5-4D36-AF94-77AA16BF70BC}|BusPassengerListCreationTool\\BusPassengerListCreationTool.csproj|solutionrelative:buspassengerlistcreationtool\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26B351C2-50C5-4D36-AF94-77AA16BF70BC}|BusPassengerListCreationTool\\BusPassengerListCreationTool.csproj|d:\\dev\\windows\\src\\repos\\buspassengerlistcreationtool\\buspassengerlistcreationtool\\userregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{26B351C2-50C5-4D36-AF94-77AA16BF70BC}|BusPassengerListCreationTool\\BusPassengerListCreationTool.csproj|solutionrelative:buspassengerlistcreationtool\\userregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26B351C2-50C5-4D36-AF94-77AA16BF70BC}|BusPassengerListCreationTool\\BusPassengerListCreationTool.csproj|d:\\dev\\windows\\src\\repos\\buspassengerlistcreationtool\\buspassengerlistcreationtool\\checkmissingentries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26B351C2-50C5-4D36-AF94-77AA16BF70BC}|BusPassengerListCreationTool\\BusPassengerListCreationTool.csproj|solutionrelative:buspassengerlistcreationtool\\checkmissingentries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,19 +26,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserList.cs",
-              "DocumentMoniker": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserList.cs",
-              "RelativeDocumentMoniker": "BusPassengerListCreationTool\\UserList.cs",
-              "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserList.cs",
-              "RelativeToolTip": "BusPassengerListCreationTool\\UserList.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAAwJkAAAARAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\User.cs",
+              "RelativeDocumentMoniker": "BusPassengerListCreationTool\\User.cs",
+              "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\User.cs",
+              "RelativeToolTip": "BusPassengerListCreationTool\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T12:57:06.636Z",
+              "WhenOpened": "2025-03-11T13:47:27.13Z",
               "EditorCaption": ""
             },
             {
@@ -57,9 +49,22 @@
               "RelativeDocumentMoniker": "BusPassengerListCreationTool\\UserRegistration.cs",
               "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserRegistration.cs",
               "RelativeToolTip": "BusPassengerListCreationTool\\UserRegistration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAG8AAAAAAAAAAADwv4sAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T12:25:08.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserList.cs",
+              "DocumentMoniker": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserList.cs",
+              "RelativeDocumentMoniker": "BusPassengerListCreationTool\\UserList.cs",
+              "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserList.cs",
+              "RelativeToolTip": "BusPassengerListCreationTool\\UserList.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAADwv3QAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T12:57:06.636Z",
               "EditorCaption": ""
             },
             {
@@ -70,46 +75,9 @@
               "RelativeDocumentMoniker": "BusPassengerListCreationTool\\UserListDatabase.cs",
               "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserListDatabase.cs",
               "RelativeToolTip": "BusPassengerListCreationTool\\UserListDatabase.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAgwC8AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAwGIAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T12:08:26.932Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserRegistration.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "DocumentMoniker": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserRegistration.cs",
-              "RelativeDocumentMoniker": "BusPassengerListCreationTool\\UserRegistration.cs",
-              "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\UserRegistration.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "RelativeToolTip": "BusPassengerListCreationTool\\UserRegistration.cs [\u30C7\u30B6\u30A4\u30F3]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T12:11:12.694Z",
-              "EditorCaption": " [\u30C7\u30B6\u30A4\u30F3]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CheckMissingEntries.cs",
-              "DocumentMoniker": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\CheckMissingEntries.cs",
-              "RelativeDocumentMoniker": "BusPassengerListCreationTool\\CheckMissingEntries.cs",
-              "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\CheckMissingEntries.cs",
-              "RelativeToolTip": "BusPassengerListCreationTool\\CheckMissingEntries.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAsAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T12:06:23.417Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\User.cs",
-              "RelativeDocumentMoniker": "BusPassengerListCreationTool\\User.cs",
-              "ToolTip": "D:\\dev\\windows\\src\\repos\\BusPassengerListCreationTool\\BusPassengerListCreationTool\\User.cs",
-              "RelativeToolTip": "BusPassengerListCreationTool\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-09T11:40:12.534Z",
               "EditorCaption": ""
             }
           ]

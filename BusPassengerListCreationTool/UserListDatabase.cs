@@ -87,6 +87,7 @@ namespace BusPassengerListCreationTool
                 string insertQuery = "INSERT INTO user_list (LastName, FirstName, LastNameKana, FirstNameKana, Address, Tel, MobileNumber, BusStop, Remarks) VALUES (@LastName, @FirstName, @LastNameKana, @FirstNameKana, @Address, @Tel, @MobileNumber, @BusStop, @Remarks)";
                 using (var cmd = new SQLiteCommand(insertQuery, connection))
                 {
+                    //★もう少しマートにしたい foreach などで。
                     // データを挿入
                     cmd.Parameters.AddWithValue("@LastName", u.LastName);
                     cmd.Parameters.AddWithValue("@FirstName", u.FirstName);

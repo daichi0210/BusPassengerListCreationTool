@@ -115,6 +115,15 @@ namespace BusPassengerListCreationTool
             UserListDatabase uld = new UserListDatabase();
             DataTable dataTable = uld.LoadTable();
 
+            // ヘッダーの高さを変更
+            dataGridViewUsers.ColumnHeadersHeight = 30;
+
+            // 各データの高さを変更
+            dataGridViewUsers.RowTemplate.Height = 30;
+
+            // ヘッダーの色を変更
+
+
             // DataGridViewにデータをバインドする
             dataGridViewUsers.DataSource = dataTable;
 
@@ -144,10 +153,10 @@ namespace BusPassengerListCreationTool
                         cellValue = "住所";
                         break;
                     case "Tel":
-                        cellValue = "電話番号（固定電話）";
+                        cellValue = "固定電話";
                         break;
                     case "MobileNumber":
-                        cellValue = "電話番号（携帯電話）";
+                        cellValue = "携帯電話";
                         break;
                     case "BusStop":
                         cellValue = "バス停";
@@ -173,9 +182,6 @@ namespace BusPassengerListCreationTool
 
             // 備考欄を自動調整
             dataGridViewUsers.Columns["Remarks"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            //★要調整
-            dataGridViewUsers.RowTemplate.Height = 40;
 
 /*
             MessageBox.Show(dataGridViewUsers.RowCount.ToString());

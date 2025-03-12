@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewUsers = new DataGridView();
             buttonEdit = new Button();
             buttonDelete = new Button();
@@ -44,16 +45,24 @@
             dataGridViewUsers.AllowUserToResizeRows = false;
             dataGridViewUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewUsers.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.Font = new Font("Yu Gothic UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewUsers.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dataGridViewUsers.EnableHeadersVisualStyles = false;
             dataGridViewUsers.Location = new Point(12, 12);
             dataGridViewUsers.MultiSelect = false;
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersVisible = false;
             dataGridViewUsers.RowTemplate.Height = 35;
             dataGridViewUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewUsers.Size = new Size(640, 331);
+            dataGridViewUsers.Size = new Size(800, 331);
             dataGridViewUsers.TabIndex = 4;
             // 
             // buttonEdit
@@ -92,7 +101,7 @@
             // buttonClose
             // 
             buttonClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonClose.Location = new Point(577, 349);
+            buttonClose.Location = new Point(737, 349);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 3;
@@ -104,13 +113,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(664, 381);
+            ClientSize = new Size(824, 381);
             Controls.Add(buttonClose);
             Controls.Add(buttonUserRegistration);
             Controls.Add(buttonDelete);
             Controls.Add(buttonEdit);
             Controls.Add(dataGridViewUsers);
-            MinimumSize = new Size(680, 420);
+            MinimumSize = new Size(840, 420);
             Name = "UserList";
             StartPosition = FormStartPosition.CenterParent;
             Text = "使用者一覧";

@@ -199,6 +199,67 @@ namespace BusPassengerListCreationTool
         }
         */
 
+        public void Update(int targetId, User u)
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(_connection))
+            {
+                // データベース接続を開く
+                connection.Open();
+
+                // データを取得するSQL
+                string query =
+                    "UPDATE user_list SET " +
+                    "LastName = @LastName, " +
+                    "FirstName = @FirstName, " +
+                    "LastNameKana = @LastNameKana, " +
+                    "FirstNameKana = @FirstNameKana, " +
+                    "Address = @Address, " +
+                    "Tel = @Tel, " +
+                    "MobileNumber = @MobileNumber, " +
+                    "BusStop = @BusStop, " +
+                    "Remarks = @Remarks " +
+                    "WHERE ID = @id";
+
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        //★もう少しマートにしたい foreach などで。
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@LastName", u.LastName);
+                        cmd.Parameters.AddWithValue("@FirstName", u.FirstName);
+                        cmd.Parameters.AddWithValue("@LastNameKana", u.LastNameKana);
+                        cmd.Parameters.AddWithValue("@FirstNameKana", u.FirstNameKana);
+                        cmd.Parameters.AddWithValue("@Address", u.Address);
+                        cmd.Parameters.AddWithValue("@Tel", u.Tel);
+                        cmd.Parameters.AddWithValue("@MobileNumber", u.MobileNumber);
+                        cmd.Parameters.AddWithValue("@BusStop", u.BusStop);
+                        cmd.Parameters.AddWithValue("@Remarks", u.Remarks);
+                        cmd.Parameters.AddWithValue("@id", targetId);
+
+                        /*
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@address", address);
+                        cmd.Parameters.AddWithValue("@TEL", TEL);
+                        cmd.Parameters.AddWithValue("@busStop", busStop);
+                        cmd.Parameters.AddWithValue("@remarks", remarks);
+                        cmd.Parameters.AddWithValue("@id", targetId);
+                        */
+
+                        //MessageBox.Show(query);
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+            }
+        }
+
+        /*
         public void editDB(int targetId, string name, string address, string TEL, string busStop, string remarks)
         {
             // SQLiteの接続を開く
@@ -232,6 +293,7 @@ namespace BusPassengerListCreationTool
                 connection.Close();
             }
         }
+        */
 
         public void deleteDB(int targetId)
         {

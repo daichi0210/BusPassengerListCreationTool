@@ -93,7 +93,22 @@ namespace BusPassengerListCreationTool
             textBoxAddress.Text = rt.fullToHalfHyphen(textBoxAddress.Text);
             textBoxTel.Text = rt.fullToHalfHyphen(textBoxTel.Text);
             textBoxMobileNumber.Text = rt.fullToHalfHyphen(textBoxMobileNumber.Text);
-            
+
+            // 使用者情報を代入
+            User u = new User();
+            u.LastName = textBoxLastName.Text;              // 姓
+            u.FirstName = textBoxFirstName.Text;            // 名
+            u.LastNameKana = textBoxLastNameKana.Text;      // 姓（カナ）
+            u.FirstNameKana = textBoxFirstNameKana.Text;    // 名（カナ）
+            u.Address = textBoxAddress.Text;                // 住所
+            u.Tel = textBoxTel.Text;                        // 電話番号（固定電話）
+            u.MobileNumber = textBoxMobileNumber.Text;      // 電話番号（携帯電話）
+            u.BusStop = comboBoxBusStop.Text;               // 乗車バス停
+            u.Remarks = textBoxRemarks.Text;                // 備考
+
+            //
+            UserListDatabase uld = new UserListDatabase();
+
             //★★★要確認★★★
             // 編集モードの場合
             if (_editTargetId != -1)
@@ -103,8 +118,9 @@ namespace BusPassengerListCreationTool
                 if (result == DialogResult.Yes)
                 {
                     //★データを上書き保存
-                    UserListDatabase users = new UserListDatabase();
-                    users.editDB(_editTargetId, textBoxLastName.Text, textBoxAddress.Text, textBoxTel.Text, comboBoxBusStop.Text, textBoxRemarks.Text);
+                    //UserListDatabase uld = new UserListDatabase();
+                    //uld.editDB(_editTargetId, textBoxLastName.Text, textBoxAddress.Text, textBoxTel.Text, comboBoxBusStop.Text, textBoxRemarks.Text);
+                    uld.Update(_editTargetId, u);
                 }
                 else
                 {
@@ -113,18 +129,6 @@ namespace BusPassengerListCreationTool
             }
             else
             {
-                // 使用者情報を代入
-                User u = new User();
-                u.LastName = textBoxLastName.Text;    // 姓
-                u.FirstName = textBoxFirstName.Text;    // 名
-                u.LastNameKana = textBoxLastNameKana.Text;    // 姓（カナ）
-                u.FirstNameKana = textBoxFirstNameKana.Text;    // 名（カナ）
-                u.Address = textBoxAddress.Text;    // 住所
-                u.Tel = textBoxTel.Text;    // 電話番号（固定電話）
-                u.MobileNumber = textBoxMobileNumber.Text;    // 電話番号（携帯電話）
-                u.BusStop = comboBoxBusStop.Text;    // 乗車バス停
-                u.Remarks = textBoxRemarks.Text;    // 備考
-                
                 /*
                 //★データベースに登録
                 string name = textBoxLastName.Text;
@@ -134,7 +138,7 @@ namespace BusPassengerListCreationTool
                 string remarks = textBoxRemarks.Text;
                 */
 
-                UserListDatabase uld = new UserListDatabase();
+                //UserListDatabase uld = new UserListDatabase();
                 //uld.addDB(name, address, TEL, busStop, remarks);
                 uld.Insert(u);
             }

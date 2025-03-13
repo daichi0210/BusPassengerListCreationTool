@@ -147,24 +147,32 @@ namespace BusPassengerListCreationTool
             this.Close();
         }
 
-
-
-
-
-
         //★★★要修正★★★
         public void userEdit()
         {
             // 使用者情報を取得
             UserListDatabase uld = new UserListDatabase();
-            DataTable userData = uld.getUserData(_editTargetId);
+            DataTable dt = uld.getUserData(_editTargetId);
 
+            // 使用者情報を代入
+            textBoxLastName.Text = dt.Rows[0]["LastName"].ToString();    // 姓
+            textBoxFirstName.Text = dt.Rows[0]["FirstName"].ToString();    // 名
+            textBoxLastNameKana.Text = dt.Rows[0]["LastNameKana"].ToString();    // 姓（カナ）
+            textBoxFirstNameKana.Text = dt.Rows[0]["FirstNameKana"].ToString();    // 名（カナ）
+            textBoxAddress.Text = dt.Rows[0]["Address"].ToString();    // 住所
+            textBoxTel.Text = dt.Rows[0]["Tel"].ToString();    // 電話番号（固定電話）
+            textBoxMobileNumber.Text = dt.Rows[0]["MobileNumber"].ToString();    // 電話番号（携帯電話）
+            comboBoxBusStop.Text = dt.Rows[0]["BusStop"].ToString();    // 乗車バス停
+            textBoxRemarks.Text = dt.Rows[0]["Remarks"].ToString();    // 備考
+
+            /*
             // 使用者情報を代入
             textBoxLastName.Text = userData.Rows[0]["Name"].ToString();
             textBoxAddress.Text = userData.Rows[0]["Address"].ToString();
             textBoxTel.Text = userData.Rows[0]["TEL"].ToString();
             comboBoxBusStop.Text = userData.Rows[0]["BusStop"].ToString();
             textBoxRemarks.Text = userData.Rows[0]["Remarks"].ToString();
+            */
 
             // 登録ボタンの Text を変更
             buttonRegistration.Text = "上書き保存";

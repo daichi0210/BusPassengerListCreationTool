@@ -121,9 +121,6 @@ namespace BusPassengerListCreationTool
             // 各データの高さを変更
             dataGridViewUsers.RowTemplate.Height = 30;
 
-            // ヘッダーの色を変更
-
-
             // DataGridViewにデータをバインドする
             dataGridViewUsers.DataSource = dataTable;
 

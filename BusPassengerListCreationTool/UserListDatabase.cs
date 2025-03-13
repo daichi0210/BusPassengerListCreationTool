@@ -113,9 +113,7 @@ namespace BusPassengerListCreationTool
         //★★★要修正★★★
         public DataTable getUserData(int targetId)
         {
-            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + _column);
-
-
+            //ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + _column);
 
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
@@ -124,10 +122,10 @@ namespace BusPassengerListCreationTool
                 connection.Open();
 
                 // データを取得するSQL
-                string query = "SELECT * FROM Users WHERE ID = @id";
+                string query = "SELECT * FROM user_list WHERE ID = @id";
 
                 // データテーブルにデータを挿入
-                DataTable dataTable = new DataTable();
+                DataTable dt = new DataTable();
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
@@ -139,14 +137,14 @@ namespace BusPassengerListCreationTool
                         cmd.ExecuteNonQuery();
 
                         // データをDataTableに埋め込む
-                        adapter.Fill(dataTable);
+                        adapter.Fill(dt);
                     }
                 }
 
                 // 接続を閉じる
                 connection.Close();
 
-                return dataTable;
+                return dt;
             }
         }
 

@@ -38,6 +38,10 @@ namespace BusPassengerListCreationTool
             "Remarks TEXT" +            // 備考
             ")";
 
+        // データベース名
+        //★要修正
+        private string database_name = "";
+
         // データベースの情報を読み込む
         public DataTable LoadTable()
         {
@@ -448,12 +452,16 @@ namespace BusPassengerListCreationTool
 
         public Dictionary<int, string> getUserInfo()
         {
+            // テーブルがなければ作成するSQL
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + _column);
+
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
 
+                /*
                 // テーブルがなければ作成するSQL
                 string createTableQuery = "CREATE TABLE IF NOT EXISTS Users (Id INTEGER PRIMARY KEY, Name TEXT, Address TEXT, TEL TEXT, BusStop TEXT, Remarks TEXT)";
                 using (var cmd = new SQLiteCommand(createTableQuery, connection))
@@ -461,6 +469,7 @@ namespace BusPassengerListCreationTool
                     // SQL文を実行してテーブルを作成
                     cmd.ExecuteNonQuery();
                 }
+                */
 
                 // Dictionaryにデータを挿入
                 var userInfo = new Dictionary<int, string>();
@@ -472,7 +481,7 @@ namespace BusPassengerListCreationTool
                 using (var cmd = new SQLiteCommand(connection))
                 {
                     // 氏名を取得するSQL
-                    cmd.CommandText = "SELECT Id, Name FROM Users";
+                    cmd.CommandText = "SELECT Id, LastName, FirstName FROM user_list";
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -482,7 +491,7 @@ namespace BusPassengerListCreationTool
                             //names[count] = reader["name"].ToString();
                             //count++;
 
-                            userInfo.Add(Int32.Parse(reader["Id"].ToString()), reader["Name"].ToString());
+                            userInfo.Add(Int32.Parse(reader["Id"].ToString()), reader["LastName"].ToString() + " " + reader["FirstName"].ToString());
                         }
                     }
                 }

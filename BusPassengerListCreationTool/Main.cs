@@ -60,11 +60,11 @@ namespace BusPassengerListCreationTool
         {
             checkedListBoxUserSelection.Items.Clear();
 
-            UserListDatabase users = new UserListDatabase();
+            UserListDatabase uld = new UserListDatabase();
 
             // Id‚ÆName‚ğ«‘‚ÅŠÇ—
             var userInfo = new Dictionary<int, string>();
-            userInfo = users.getUserInfo();
+            userInfo = uld.getUserInfo();
 
             foreach (string name in userInfo.Values)
             {

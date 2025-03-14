@@ -21,7 +21,7 @@ namespace BusPassengerListCreationTool
     internal class UserListDatabase
     {
         // データベースファイルへの接続文字列
-        private string _connection = "Data Source=users.db;Version=3;";
+        private string _connection = "Data Source=BusPassengerListCreationTool.db;Version=3;";
         
         // テーブルのカラム
         private string _column =
@@ -46,7 +46,6 @@ namespace BusPassengerListCreationTool
         public DataTable LoadTable()
         {
             // テーブルがなければ作成するSQL
-            //★★★どこに保存されている…？
             ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + _column);
 
             //★★★仮のデータを挿入

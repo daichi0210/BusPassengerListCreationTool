@@ -76,7 +76,7 @@ namespace BusPassengerListCreationTool
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             // 設定情報を読み込み
-            Settings settings = new Settings();
+            Settings s = new Settings();
 
             // 最大乗車人数の確認
             // 選択されている項目の個数を取得
@@ -86,9 +86,9 @@ namespace BusPassengerListCreationTool
                 checkedCount++;
             }
             // 選択されている項目の数が最大乗車人数を超えている場合
-            if (checkedCount > settings.getMaximumPeople())
+            if (checkedCount > s.getMaximumPeople())
             {
-                MessageBox.Show("最大乗車人数【" + settings.getMaximumPeople() + "人】を超えています。");
+                MessageBox.Show("最大乗車人数【" + s.getMaximumPeople() + "人】を超えています。");
                 return;
             }
             // 誰も選択されていない場合
@@ -102,7 +102,7 @@ namespace BusPassengerListCreationTool
             string dayOfWeek = dateTimePickerOperationDays.Value.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture);
             string dayOfWeekJp = dateTimePickerOperationDays.Value.ToString("ddd");
 
-            if (dayOfWeek != settings.getOperationDays())
+            if (dayOfWeek != s.getOperationDays())
             {
                 DialogResult result = MessageBox.Show("運行日は" + dayOfWeekJp + "曜日です。このまま乗車名簿を作成しますか？", "", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No)
@@ -112,13 +112,14 @@ namespace BusPassengerListCreationTool
             }
 
             // IdとNameを辞書で管理
-            UserListDatabase users = new UserListDatabase();
+            UserListDatabase uld = new UserListDatabase();
             var userInfo = new Dictionary<int, string>();
-            userInfo = users.getUserInfo();
+            userInfo = uld.getUserInfo();
 
             //★同姓同名が存在しない前提
             // 乗車する人の情報を取得する
-            UserInfo[] ui = Array.Empty<UserInfo>();
+            //UserInfo[] ui = Array.Empty<UserInfo>();
+            User[] ui = Array.Empty<User>();
             int count = 0;
 
             foreach (string item in checkedListBoxUserSelection.CheckedItems)
@@ -131,15 +132,18 @@ namespace BusPassengerListCreationTool
                         Array.Resize(ref ui, count + 1);
                         
                         // 配列を初期化
-                        ui[count] = new UserInfo();
+                        //ui[count] = new UserInfo();
+                        ui[count] = new User();
 
                         //
-                        DataTable userData = users.getUserData(data.Key);
+                        DataTable userData = uld.getUserData(data.Key);
 
                         // 使用者情報を代入
-                        ui[count].Name = userData.Rows[0]["Name"].ToString();
+                        ui[count].LastName = userData.Rows[0]["LastName"].ToString();
+                        ui[count].FirstName = userData.Rows[0]["FirstName"].ToString();
                         ui[count].Address = userData.Rows[0]["Address"].ToString();
-                        ui[count].Tel = userData.Rows[0]["TEL"].ToString();
+                        ui[count].Tel = userData.Rows[0]["Tel"].ToString();
+                        ui[count].MobileNumber = userData.Rows[0]["MobileNumber"].ToString();
                         ui[count].BusStop = userData.Rows[0]["BusStop"].ToString();
                         ui[count].Remarks = userData.Rows[0]["Remarks"].ToString();
 
@@ -151,13 +155,14 @@ namespace BusPassengerListCreationTool
             }
 
             // 乗客リストをバス停の順番に並び替える
-            UserInfo[] uiBusStopOrder = new UserInfo[ui.Length];
-            string[] busStopOrder = settings.getBusStopName();
+            //UserInfo[] uiBusStopOrder = new UserInfo[ui.Length];
+            User[] uiBusStopOrder = new User[ui.Length];
+            string[] busStopOrder = s.getBusStopName();
             int uibIndex = 0;
 
             foreach (string busStop in busStopOrder)
             {
-                foreach (UserInfo i in ui)
+                foreach (User i in ui)
                 {
                     if (i.BusStop == busStop)
                     {
@@ -233,11 +238,12 @@ namespace BusPassengerListCreationTool
                 int startColumn = 2;
 
                 // 各セルへ値を代入
-                foreach (UserInfo uis in uiBusStopOrder)
+                //foreach (UserInfo uis in uiBusStopOrder)
+                foreach (User uis in uiBusStopOrder)
                 {
-                    ws.Cell(startRow, startColumn).Value = uis.Name;
+                    ws.Cell(startRow, startColumn).Value = uis.LastName + "　" + uis.FirstName;
                     ws.Cell(startRow, startColumn + 1).Value = uis.Address;
-                    ws.Cell(startRow, startColumn + 2).Value = uis.Tel;
+                    ws.Cell(startRow, startColumn + 2).Value = uis.Tel + Environment.NewLine + uis.MobileNumber;
                     ws.Cell(startRow, startColumn + 3).Value = uis.BusStop;
                     ws.Cell(startRow, startColumn + 4).Value = uis.Remarks;
 
@@ -245,7 +251,7 @@ namespace BusPassengerListCreationTool
                 }
 
                 // 空席の分のセルを書き換え
-                for (int i = 0; i < settings.getMaximumPeople() - uiBusStopOrder.Length; i++)
+                for (int i = 0; i < s.getMaximumPeople() - uiBusStopOrder.Length; i++)
                 {
                     ws.Cell(startRow, startColumn).Value = "";
                     ws.Cell(startRow, startColumn + 1).Value = "";

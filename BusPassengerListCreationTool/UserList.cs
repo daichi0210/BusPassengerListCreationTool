@@ -50,13 +50,6 @@ namespace BusPassengerListCreationTool
             loadData();
         }
 
-
-
-
-
-
-
-
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             int targetIndex = -1;
@@ -89,8 +82,9 @@ namespace BusPassengerListCreationTool
                 if (result == DialogResult.Yes)
                 {
                     // データを削除
-                    UserListDatabase users = new UserListDatabase();
-                    users.deleteDB(targetId);
+                    UserListDatabase uld = new UserListDatabase();
+                    //users.deleteDB(targetId);
+                    uld.Delete(targetId);
 
                     // データを取得
                     //DataTable dataTable = users.loadDB();

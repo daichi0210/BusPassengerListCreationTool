@@ -295,6 +295,36 @@ namespace BusPassengerListCreationTool
         }
         */
 
+        public void Delete(int targetId)
+        {
+            // SQLiteの接続を開く
+            using (var connection = new SQLiteConnection(_connection))
+            {
+                // データベース接続を開く
+                connection.Open();
+
+                // データを取得するSQL
+                string query = "DELETE FROM user_list WHERE ID = @id";
+
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
+                    {
+                        // データを挿入
+                        cmd.Parameters.AddWithValue("@id", targetId);
+
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // 接続を閉じる
+                connection.Close();
+            }
+        }
+
+
+        /*
         public void deleteDB(int targetId)
         {
             // SQLiteの接続を開く
@@ -322,6 +352,7 @@ namespace BusPassengerListCreationTool
                 connection.Close();
             }
         }
+        */
 
         public string[] getDB()
         {

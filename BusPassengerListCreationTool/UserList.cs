@@ -55,12 +55,7 @@ namespace BusPassengerListCreationTool
             int targetIndex = -1;
 
             // 選択されている行を取得
-            //foreach (DataGridViewRow r in dataGridViewUsers.SelectedRows)
-            //{
-            //    targetIndex = r.Index;
-            //}
             targetIndex = dataGridViewUsers.CurrentCell.RowIndex;
-
 
             //★初期状態で一行目が選択されているので不都合？
             if (targetIndex == -1)
@@ -68,7 +63,6 @@ namespace BusPassengerListCreationTool
                 // 削除の確認メッセージ
                 MessageBox.Show("削除するデータを選択してください。");
             }
-
             //★すべてのデータを削除することができない…。
             else
             {
@@ -83,14 +77,7 @@ namespace BusPassengerListCreationTool
                 {
                     // データを削除
                     UserListDatabase uld = new UserListDatabase();
-                    //users.deleteDB(targetId);
                     uld.Delete(targetId);
-
-                    // データを取得
-                    //DataTable dataTable = users.loadDB();
-
-                    // DataGridViewにデータをバインドする
-                    //dataGridViewUsers.DataSource = dataTable;
                 }
 
                 // 使用者一覧情報を読み込む
@@ -173,21 +160,6 @@ namespace BusPassengerListCreationTool
 
             // 備考欄を自動調整
             dataGridViewUsers.Columns["Remarks"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-/*
-            MessageBox.Show(dataGridViewUsers.RowCount.ToString());
-
-            // dataGridViewの高さを動的に変更（最下部に余白ができるため）
-            int hi = dataGridViewUsers.Height;
-            int ch = dataGridViewUsers.ColumnHeadersHeight;
-            int h = dataGridViewUsers.RowTemplate.Height;
-            int n = dataGridViewUsers.RowCount;
-
-            MessageBox.Show(hi.ToString());
-            hi = ch + h * n;
-            dataGridViewUsers.Height = hi;
-            MessageBox.Show(hi.ToString());
-*/
 
             // アクティブなセルの選択を解除する
             dataGridViewUsers.ClearSelection();

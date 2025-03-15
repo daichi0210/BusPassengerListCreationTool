@@ -31,11 +31,11 @@ namespace BusPassengerListCreationTool
             databaseLoad();
 
             // 設定情報を読み込み
-            Settings settings = new Settings();
+            Settings s = new Settings();
 
             // 本日の日付を取得
             DateTime dateValue = DateTime.Now;
-            while (settings.getOperationDays() != dateValue.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture))
+            while (s.getOperationDays() != dateValue.ToString("ddd", System.Globalization.CultureInfo.InvariantCulture))
             {
                 dateValue = dateValue.AddDays(1);
             }
@@ -49,8 +49,8 @@ namespace BusPassengerListCreationTool
 
         private void buttonUserList_Click(object sender, EventArgs e)
         {
-            UserList userList = new UserList();
-            userList.ShowDialog();
+            UserList ul = new UserList();
+            ul.ShowDialog();
 
             // データを読み込む
             databaseLoad();
@@ -68,7 +68,6 @@ namespace BusPassengerListCreationTool
 
             foreach (string name in userInfo.Values)
             {
-                //MessageBox.Show(id.ToString());
                 checkedListBoxUserSelection.Items.Add(name);
             }
         }
@@ -85,6 +84,7 @@ namespace BusPassengerListCreationTool
             {
                 checkedCount++;
             }
+
             // 選択されている項目の数が最大乗車人数を超えている場合
             if (checkedCount > s.getMaximumPeople())
             {
@@ -132,7 +132,6 @@ namespace BusPassengerListCreationTool
                         Array.Resize(ref ui, count + 1);
                         
                         // 配列を初期化
-                        //ui[count] = new UserInfo();
                         ui[count] = new User();
 
                         //
@@ -155,7 +154,6 @@ namespace BusPassengerListCreationTool
             }
 
             // 乗客リストをバス停の順番に並び替える
-            //UserInfo[] uiBusStopOrder = new UserInfo[ui.Length];
             User[] uiBusStopOrder = new User[ui.Length];
             string[] busStopOrder = s.getBusStopName();
             int uibIndex = 0;
@@ -234,11 +232,11 @@ namespace BusPassengerListCreationTool
 
                 // 開始行を指定
                 int startRow = 5;
+
                 // 開始列を指定
                 int startColumn = 2;
 
                 // 各セルへ値を代入
-                //foreach (UserInfo uis in uiBusStopOrder)
                 foreach (User uis in uiBusStopOrder)
                 {
                     ws.Cell(startRow, startColumn).Value = uis.LastName + "　" + uis.FirstName;

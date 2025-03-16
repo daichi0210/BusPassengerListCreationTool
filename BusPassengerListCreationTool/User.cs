@@ -11,6 +11,21 @@
         private string _mobileNumber;   // 電話番号（携帯電話）
         private string _busStop;        // 乗車バス停
         private string _remarks;        // 備考
+        
+        private string _column =
+            "(" +
+            "Id INTEGER PRIMARY KEY, " +
+            "LastName TEXT, " +         // 姓
+            "FirstName TEXT, " +        // 名
+            "LastNameKana TEXT, " +     // セイ
+            "FirstNameKana TEXT, " +    // メイ
+            "Address TEXT, " +          // 住所
+            "Tel TEXT, " +              // 固定電話番号
+            "MobileNumber TEXT, " +     // 携帯電話番号
+            "BusStop TEXT, " +          // バス停
+            "Remarks TEXT" +            // 備考
+            ")";
+
 
         public string LastName
         {
@@ -56,6 +71,11 @@
         {
             get { return _remarks; }
             set { _remarks = value; }
+        }
+
+        public string Column
+        {
+            get { return _column; }
         }
     }
 }

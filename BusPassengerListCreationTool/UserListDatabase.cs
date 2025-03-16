@@ -15,6 +15,7 @@ using static System.Data.Entity.Infrastructure.Design.Executor;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using System.Reflection;
 
 namespace BusPassengerListCreationTool
 {
@@ -64,23 +65,44 @@ namespace BusPassengerListCreationTool
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
             {
-                connection.Open(); // データベース接続を開く
+                // データベース接続を開く
+                connection.Open();
 
                 // データを挿入するSQL
-                string insertQuery = "INSERT INTO user_list (LastName, FirstName, LastNameKana, FirstNameKana, Address, Tel, MobileNumber, BusStop, Remarks) VALUES (@LastName, @FirstName, @LastNameKana, @FirstNameKana, @Address, @Tel, @MobileNumber, @BusStop, @Remarks)";
-                using (var cmd = new SQLiteCommand(insertQuery, connection))
+                //★UPDATEと同じ記述にする
+                string query = "INSERT INTO user_list (";
+                foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
                 {
-                    //★もう少しマートにしたい foreach などで。
+                    query += v.Entry.Key;
+
+                    if ((u.Column.Count - 1) - v.Index != 0)
+                    {
+                        query += ", ";
+                    }
+                }
+                query += ") VALUES (";
+                foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
+                {
+                    query += "@" + v.Entry.Key;
+
+                    if ((u.Column.Count - 1) - v.Index != 0)
+                    {
+                        query += ", ";
+                    }
+                }
+                query += ")";
+
+                using (var cmd = new SQLiteCommand(query, connection))
+                {
                     // データを挿入
-                    cmd.Parameters.AddWithValue("@LastName", u.LastName);
-                    cmd.Parameters.AddWithValue("@FirstName", u.FirstName);
-                    cmd.Parameters.AddWithValue("@LastNameKana", u.LastNameKana);
-                    cmd.Parameters.AddWithValue("@FirstNameKana", u.FirstNameKana);
-                    cmd.Parameters.AddWithValue("@Address", u.Address);
-                    cmd.Parameters.AddWithValue("@Tel", u.Tel);
-                    cmd.Parameters.AddWithValue("@MobileNumber", u.MobileNumber);
-                    cmd.Parameters.AddWithValue("@BusStop", u.BusStop);
-                    cmd.Parameters.AddWithValue("@Remarks", u.Remarks);
+                    foreach (var c in u.Column)
+                    {
+                        string propertyName = c.Key;
+                        PropertyInfo pi = typeof(User).GetProperty(propertyName);
+                        object value = pi.GetValue(u);
+
+                        cmd.Parameters.AddWithValue("@" + propertyName, value);
+                    }
 
                     // SQL実行
                     cmd.ExecuteNonQuery();
@@ -100,34 +122,33 @@ namespace BusPassengerListCreationTool
                 connection.Open();
 
                 // データを取得するSQL
-                string query =
-                    "UPDATE user_list SET " +
-                    "LastName = @LastName, " +
-                    "FirstName = @FirstName, " +
-                    "LastNameKana = @LastNameKana, " +
-                    "FirstNameKana = @FirstNameKana, " +
-                    "Address = @Address, " +
-                    "Tel = @Tel, " +
-                    "MobileNumber = @MobileNumber, " +
-                    "BusStop = @BusStop, " +
-                    "Remarks = @Remarks " +
-                    "WHERE ID = @id";
+                string query = "UPDATE user_list SET ";
+                foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
+                {
+                    query += v.Entry.Key + " = @" + v.Entry.Key;
+
+                    if ((u.Column.Count - 1) - v.Index != 0)
+                    {
+                        query += ", ";
+                    }
+                }
+                query += " WHERE ID = @id";
+
+                MessageBox.Show(query);
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
                     {
-                        //★もう少しマートにしたい foreach などで。
                         // データを挿入
-                        cmd.Parameters.AddWithValue("@LastName", u.LastName);
-                        cmd.Parameters.AddWithValue("@FirstName", u.FirstName);
-                        cmd.Parameters.AddWithValue("@LastNameKana", u.LastNameKana);
-                        cmd.Parameters.AddWithValue("@FirstNameKana", u.FirstNameKana);
-                        cmd.Parameters.AddWithValue("@Address", u.Address);
-                        cmd.Parameters.AddWithValue("@Tel", u.Tel);
-                        cmd.Parameters.AddWithValue("@MobileNumber", u.MobileNumber);
-                        cmd.Parameters.AddWithValue("@BusStop", u.BusStop);
-                        cmd.Parameters.AddWithValue("@Remarks", u.Remarks);
+                        foreach (var c in u.Column)
+                        {
+                            string propertyName = c.Key;
+                            PropertyInfo pi = typeof(User).GetProperty(propertyName);
+                            object value = pi.GetValue(u);
+
+                            cmd.Parameters.AddWithValue("@" + propertyName, value);
+                        }
                         cmd.Parameters.AddWithValue("@id", targetId);
 
                         // SQL実行

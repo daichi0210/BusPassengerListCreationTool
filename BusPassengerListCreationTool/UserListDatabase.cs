@@ -264,8 +264,18 @@ namespace BusPassengerListCreationTool
         {
             User u = new User();
 
-            // テーブルがなければ作成するSQL
-            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list" + u.Column);
+            string query = "Id INTEGER PRIMARY KEY, ";
+            foreach (var v in u.Column.Select((Entry, Index) => new {Entry, Index}))
+            {
+                query += v.Entry.Key + " " + v.Entry.Value;
+
+                if ((u.Column.Count - 1) - v.Index != 0)
+                {
+                    query += ", ";
+                }
+            }
+
+            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list (" + query + ")");
         }
     }
 }

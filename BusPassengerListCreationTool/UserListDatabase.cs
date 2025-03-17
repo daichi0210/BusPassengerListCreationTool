@@ -25,6 +25,9 @@ namespace BusPassengerListCreationTool
         // データベースファイルへの接続文字列
         private string _connection = "Data Source=BusPassengerListCreationTool.db;Version=3;";
 
+        // テーブル名
+        private string _tableName = "user_list";
+
         // ★★★データベースの情報を読み込む
         public DataTable LoadTable()
         {
@@ -35,7 +38,7 @@ namespace BusPassengerListCreationTool
             DataTable dataTable = new DataTable();
 
             // SQL文
-            string query = "SELECT * FROM user_list";
+            string query = "SELECT * FROM " + _tableName;
             
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
@@ -64,7 +67,7 @@ namespace BusPassengerListCreationTool
         public void Insert(User u)
         {
             // クエリを作成
-            string query = "INSERT INTO user_list (";
+            string query = "INSERT INTO + " + _tableName + "(";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
                 query += v.Entry.Key;
@@ -96,7 +99,7 @@ namespace BusPassengerListCreationTool
         public void Update(int targetId, User u)
         {
             // クエリを作成
-            string query = "UPDATE user_list SET ";
+            string query = "UPDATE " + _tableName + " SET ";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
                 query += v.Entry.Key + " = ";
@@ -120,7 +123,7 @@ namespace BusPassengerListCreationTool
         public void Delete(int targetId)
         {
             // クエリを作成
-            string query = "DELETE FROM user_list WHERE ID = " + targetId.ToString();
+            string query = "DELETE FROM " + _tableName + " WHERE ID = " + targetId.ToString();
 
             // SQL実行
             ExecuteNonQuery(query);
@@ -136,7 +139,7 @@ namespace BusPassengerListCreationTool
                 connection.Open();
 
                 // データを取得するSQL
-                string query = "SELECT * FROM user_list WHERE ID = @id";
+                string query = "SELECT * FROM " + _tableName + " WHERE ID = @id";
 
                 // データテーブルにデータを挿入
                 DataTable dt = new DataTable();
@@ -200,7 +203,7 @@ namespace BusPassengerListCreationTool
                 using (var cmd = new SQLiteCommand(connection))
                 {
                     // 氏名を取得するSQL
-                    cmd.CommandText = "SELECT Id, LastName, FirstName FROM user_list";
+                    cmd.CommandText = "SELECT Id, LastName, FirstName FROM " + _tableName;
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -223,7 +226,7 @@ namespace BusPassengerListCreationTool
         {
             // クエリを作成
             User u = new User();
-            string query = "CREATE TABLE IF NOT EXISTS user_list (";
+            string query = "CREATE TABLE IF NOT EXISTS " + _tableName + "(";
             query += "Id INTEGER PRIMARY KEY, ";
             foreach (var v in u.Column.Select((Entry, Index) => new {Entry, Index}))
             {

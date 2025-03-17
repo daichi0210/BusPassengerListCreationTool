@@ -122,49 +122,22 @@ namespace BusPassengerListCreationTool
             string query = "UPDATE user_list SET ";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
-                query += v.Entry.Key + " = @" + v.Entry.Key;
+                query += v.Entry.Key + " = ";
+
+                PropertyInfo pi = typeof(User).GetProperty(v.Entry.Key);
+                object value = pi.GetValue(u);
+
+                query += "'" + value + "'";
 
                 if ((u.Column.Count - 1) - v.Index != 0)
                 {
                     query += ", ";
                 }
             }
-            query += " WHERE ID = @id";
+            query += " WHERE ID = " + targetId.ToString();
 
-
-
-
-
-
-            // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(_connection))
-            {
-                // データベース接続を開く
-                connection.Open();
-
-                using (var cmd = new SQLiteCommand(query, connection))
-                {
-                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
-                    {
-                        // データを挿入
-                        foreach (var c in u.Column)
-                        {
-                            string propertyName = c.Key;
-                            PropertyInfo pi = typeof(User).GetProperty(propertyName);
-                            object value = pi.GetValue(u);
-
-                            cmd.Parameters.AddWithValue("@" + propertyName, value);
-                        }
-                        cmd.Parameters.AddWithValue("@id", targetId);
-
-                        // SQL実行
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                // 接続を閉じる
-                connection.Close();
-            }
+            // SQL実行
+            ExecuteNonQuery(query);
         }
 
         public void Delete(int targetId)

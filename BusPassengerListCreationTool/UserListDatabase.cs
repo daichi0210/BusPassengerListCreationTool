@@ -22,11 +22,18 @@ namespace BusPassengerListCreationTool
 {
     internal class UserListDatabase
     {
-        // データベースファイルへの接続文字列
-        private string _connection = "Data Source=BusPassengerListCreationTool.db;Version=3;";
-
+        // データベースのファイル名
+        private string _databaseFileName = "BusPassengerListCreationTool.db";
         // テーブル名
         private string _tableName = "user_list";
+        // データベースファイルへの接続文字列
+        private string _connection;
+
+        public UserListDatabase()
+        {
+            // データベースファイルへの接続文字列を代入
+            _connection = "Data Source=" + _databaseFileName + ";Version=3;";
+        }
 
         // ★★★データベースの情報を読み込む
         public DataTable LoadTable()
@@ -67,7 +74,7 @@ namespace BusPassengerListCreationTool
         public void Insert(User u)
         {
             // クエリを作成
-            string query = "INSERT INTO + " + _tableName + "(";
+            string query = "INSERT INTO " + _tableName + "(";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
                 query += v.Entry.Key;

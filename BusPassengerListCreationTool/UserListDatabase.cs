@@ -25,7 +25,7 @@ namespace BusPassengerListCreationTool
         // データベースファイルへの接続文字列
         private string _connection = "Data Source=BusPassengerListCreationTool.db;Version=3;";
 
-        // データベースの情報を読み込む
+        // ★★★データベースの情報を読み込む
         public DataTable LoadTable()
         {
             // テーブルがなければ作成する
@@ -63,8 +63,7 @@ namespace BusPassengerListCreationTool
         // データベースに追加する
         public void Insert(User u)
         {
-            // データを挿入するSQL
-            //★UPDATEと同じ記述にする
+            // クエリを作成
             string query = "INSERT INTO user_list (";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
@@ -78,7 +77,9 @@ namespace BusPassengerListCreationTool
             query += ") VALUES (";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
-                query += "@" + v.Entry.Key;
+                PropertyInfo pi = typeof(User).GetProperty(v.Entry.Key);
+                object value = pi.GetValue(u);
+                query += "'" + value + "'";
 
                 if ((u.Column.Count - 1) - v.Index != 0)
                 {
@@ -87,38 +88,14 @@ namespace BusPassengerListCreationTool
             }
             query += ")";
 
-
-
-            // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(_connection))
-            {
-                // データベース接続を開く
-                connection.Open();
-
-                using (var cmd = new SQLiteCommand(query, connection))
-                {
-                    // データを挿入
-                    foreach (var c in u.Column)
-                    {
-                        string propertyName = c.Key;
-                        PropertyInfo pi = typeof(User).GetProperty(propertyName);
-                        object value = pi.GetValue(u);
-
-                        cmd.Parameters.AddWithValue("@" + propertyName, value);
-                    }
-
-                    // SQL実行
-                    cmd.ExecuteNonQuery();
-                }
-
-                // 接続を閉じる
-                connection.Close();
-            }
+            // SQL実行
+            ExecuteNonQuery(query);
         }
 
+        // データベースを更新する
         public void Update(int targetId, User u)
         {
-            // データを更新するSQL
+            // クエリを作成
             string query = "UPDATE user_list SET ";
             foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
             {
@@ -126,7 +103,6 @@ namespace BusPassengerListCreationTool
 
                 PropertyInfo pi = typeof(User).GetProperty(v.Entry.Key);
                 object value = pi.GetValue(u);
-
                 query += "'" + value + "'";
 
                 if ((u.Column.Count - 1) - v.Index != 0)
@@ -140,9 +116,10 @@ namespace BusPassengerListCreationTool
             ExecuteNonQuery(query);
         }
 
+        // データベースから削除する
         public void Delete(int targetId)
         {
-            // データを削除するSQL
+            // クエリを作成
             string query = "DELETE FROM user_list WHERE ID = " + targetId.ToString();
 
             // SQL実行
@@ -205,6 +182,7 @@ namespace BusPassengerListCreationTool
             }
         }
 
+        //★★★
         public Dictionary<int, string> getUserInfo()
         {
             // テーブルがなければ作成する
@@ -243,9 +221,10 @@ namespace BusPassengerListCreationTool
         // テーブルがなければ作成する
         public void CreateTable()
         {
+            // クエリを作成
             User u = new User();
-
-            string query = "Id INTEGER PRIMARY KEY, ";
+            string query = "CREATE TABLE IF NOT EXISTS user_list (";
+            query += "Id INTEGER PRIMARY KEY, ";
             foreach (var v in u.Column.Select((Entry, Index) => new {Entry, Index}))
             {
                 query += v.Entry.Key + " " + v.Entry.Value;
@@ -255,8 +234,10 @@ namespace BusPassengerListCreationTool
                     query += ", ";
                 }
             }
+            query += ")";
 
-            ExecuteNonQuery("CREATE TABLE IF NOT EXISTS user_list (" + query + ")");
+            // SQL実行
+            ExecuteNonQuery(query);
         }
     }
 }

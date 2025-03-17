@@ -35,39 +35,46 @@ namespace BusPassengerListCreationTool
             _connection = "Data Source=" + _databaseFileName + ";Version=3;";
         }
 
-        // ★★★データベースの情報を読み込む
-        public DataTable LoadTable()
+        // 結果を返さないクエリを実行する
+        public void ExecuteNonQuery(string query)
         {
-            // テーブルがなければ作成する
-            CreateTable();
-
-            //// テーブルのデータを取得
-            DataTable dataTable = new DataTable();
-
-            // SQL文
-            string query = "SELECT * FROM " + _tableName;
-            
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
 
-                //// DataTableにデータを挿入
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
-                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
-                    {
-                        // DataTableにデータを埋め込む
-                        adapter.Fill(dataTable);  
-                    }
+                    // SQL文を実行
+                    cmd.ExecuteNonQuery();
                 }
 
-                // 接続を閉じる
+                // データベース接続を閉じる
                 connection.Close();
             }
+        }
 
-            return dataTable;
+        // テーブルがなければ作成する
+        public void CreateTable()
+        {
+            // クエリを作成
+            User u = new User();
+            string query = "CREATE TABLE IF NOT EXISTS " + _tableName + "(";
+            query += "Id INTEGER PRIMARY KEY, ";
+            foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
+            {
+                query += v.Entry.Key + " " + v.Entry.Value;
+
+                if ((u.Column.Count - 1) - v.Index != 0)
+                {
+                    query += ", ";
+                }
+            }
+            query += ")";
+
+            // SQL実行
+            ExecuteNonQuery(query);
         }
 
         // データベースに追加する
@@ -136,60 +143,58 @@ namespace BusPassengerListCreationTool
             ExecuteNonQuery(query);
         }
 
-        //★★★要修正★★★
-        public DataTable getUserData(int targetId)
+        // DataTableにデータを挿入するクエリを実行する
+        public DataTable AdapterFill(string query)
         {
+            DataTable dt = new DataTable();
+
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
 
-                // データを取得するSQL
-                string query = "SELECT * FROM " + _tableName + " WHERE ID = @id";
-
-                // データテーブルにデータを挿入
-                DataTable dt = new DataTable();
+                // DataTableにデータを挿入
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
                     using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
                     {
-                        // データを挿入
-                        cmd.Parameters.AddWithValue("@id", targetId);
-
-                        // SQL実行
-                        cmd.ExecuteNonQuery();
-
-                        // データをDataTableに埋め込む
                         adapter.Fill(dt);
                     }
                 }
 
                 // 接続を閉じる
                 connection.Close();
-
-                return dt;
             }
+
+            return dt;
         }
 
-        // 結果を返さないクエリを実行する
-        public void ExecuteNonQuery(string query)
+        // データベースのテーブルを読み込む
+        public DataTable LoadTable()
         {
-            // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(_connection))
-            {
-                // データベース接続を開く
-                connection.Open();
+            // テーブルがなければ作成する
+            CreateTable();
 
-                using (var cmd = new SQLiteCommand(query, connection))
-                {
-                    // SQL文を実行
-                    cmd.ExecuteNonQuery();
-                }
+            // クエリを作成
+            string query = "SELECT * FROM " + _tableName;
 
-                // データベース接続を閉じる
-                connection.Close();
-            }
+            // SQL実行
+            DataTable dt = AdapterFill(query);
+
+            return dt;
+        }
+
+        // 指定したIdのデータを取得する
+        public DataTable getUserData(int targetId)
+        {
+            // クエリを作成
+            string query = "SELECT * FROM " + _tableName + " WHERE ID = " + targetId.ToString();
+
+            // SQL実行
+            DataTable dt = AdapterFill(query);
+
+            return dt;
         }
 
         //★★★
@@ -228,26 +233,5 @@ namespace BusPassengerListCreationTool
             }
         }
 
-        // テーブルがなければ作成する
-        public void CreateTable()
-        {
-            // クエリを作成
-            User u = new User();
-            string query = "CREATE TABLE IF NOT EXISTS " + _tableName + "(";
-            query += "Id INTEGER PRIMARY KEY, ";
-            foreach (var v in u.Column.Select((Entry, Index) => new {Entry, Index}))
-            {
-                query += v.Entry.Key + " " + v.Entry.Value;
-
-                if ((u.Column.Count - 1) - v.Index != 0)
-                {
-                    query += ", ";
-                }
-            }
-            query += ")";
-
-            // SQL実行
-            ExecuteNonQuery(query);
-        }
     }
 }

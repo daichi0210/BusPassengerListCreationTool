@@ -16,6 +16,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using System.Reflection;
+using DocumentFormat.OpenXml.Office.Word;
 
 namespace BusPassengerListCreationTool
 {
@@ -62,35 +63,37 @@ namespace BusPassengerListCreationTool
         // データベースに追加する
         public void Insert(User u)
         {
+            // データを挿入するSQL
+            //★UPDATEと同じ記述にする
+            string query = "INSERT INTO user_list (";
+            foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
+            {
+                query += v.Entry.Key;
+
+                if ((u.Column.Count - 1) - v.Index != 0)
+                {
+                    query += ", ";
+                }
+            }
+            query += ") VALUES (";
+            foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
+            {
+                query += "@" + v.Entry.Key;
+
+                if ((u.Column.Count - 1) - v.Index != 0)
+                {
+                    query += ", ";
+                }
+            }
+            query += ")";
+
+
+
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
-
-                // データを挿入するSQL
-                //★UPDATEと同じ記述にする
-                string query = "INSERT INTO user_list (";
-                foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
-                {
-                    query += v.Entry.Key;
-
-                    if ((u.Column.Count - 1) - v.Index != 0)
-                    {
-                        query += ", ";
-                    }
-                }
-                query += ") VALUES (";
-                foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
-                {
-                    query += "@" + v.Entry.Key;
-
-                    if ((u.Column.Count - 1) - v.Index != 0)
-                    {
-                        query += ", ";
-                    }
-                }
-                query += ")";
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
@@ -115,26 +118,29 @@ namespace BusPassengerListCreationTool
 
         public void Update(int targetId, User u)
         {
+            // データを更新するSQL
+            string query = "UPDATE user_list SET ";
+            foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
+            {
+                query += v.Entry.Key + " = @" + v.Entry.Key;
+
+                if ((u.Column.Count - 1) - v.Index != 0)
+                {
+                    query += ", ";
+                }
+            }
+            query += " WHERE ID = @id";
+
+
+
+
+
+
             // SQLiteの接続を開く
             using (var connection = new SQLiteConnection(_connection))
             {
                 // データベース接続を開く
                 connection.Open();
-
-                // データを取得するSQL
-                string query = "UPDATE user_list SET ";
-                foreach (var v in u.Column.Select((Entry, Index) => new { Entry, Index }))
-                {
-                    query += v.Entry.Key + " = @" + v.Entry.Key;
-
-                    if ((u.Column.Count - 1) - v.Index != 0)
-                    {
-                        query += ", ";
-                    }
-                }
-                query += " WHERE ID = @id";
-
-                MessageBox.Show(query);
 
                 using (var cmd = new SQLiteCommand(query, connection))
                 {
@@ -163,30 +169,11 @@ namespace BusPassengerListCreationTool
 
         public void Delete(int targetId)
         {
-            // SQLiteの接続を開く
-            using (var connection = new SQLiteConnection(_connection))
-            {
-                // データベース接続を開く
-                connection.Open();
+            // データを削除するSQL
+            string query = "DELETE FROM user_list WHERE ID = " + targetId.ToString();
 
-                // データを取得するSQL
-                string query = "DELETE FROM user_list WHERE ID = @id";
-
-                using (var cmd = new SQLiteCommand(query, connection))
-                {
-                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd))
-                    {
-                        // データを挿入
-                        cmd.Parameters.AddWithValue("@id", targetId);
-
-                        // SQL実行
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                // 接続を閉じる
-                connection.Close();
-            }
+            // SQL実行
+            ExecuteNonQuery(query);
         }
 
         //★★★要修正★★★
